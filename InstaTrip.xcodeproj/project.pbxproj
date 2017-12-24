@@ -15,6 +15,10 @@
 		2E43A5551FF02F60009927BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E43A5531FF02F60009927BE /* LaunchScreen.storyboard */; };
 		2E43A5601FF02F61009927BE /* InstaTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43A55F1FF02F61009927BE /* InstaTripTests.swift */; };
 		2E43A56B1FF02F61009927BE /* InstaTripUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43A56A1FF02F61009927BE /* InstaTripUITests.swift */; };
+		2E43A5791FF0462E009927BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E43A5781FF0462E009927BE /* GoogleService-Info.plist */; };
+		43061015DB7FFF677D148D47 /* Pods_InstaTripUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */; };
+		5E31289B00BCB89EB0375F2C /* Pods_InstaTripTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED87338CB75431968C7F0AD6 /* Pods_InstaTripTests.framework */; };
+		FB87138B5C7BAF64DD6F349B /* Pods_InstaTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDE0838092592DF5EF13837 /* Pods_InstaTrip.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CDE0838092592DF5EF13837 /* Pods_InstaTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11F03C376BC6DE91E7295202 /* Pods-InstaTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTrip.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip.debug.xcconfig"; sourceTree = "<group>"; };
+		20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaTripUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		282B22731446655EF53D9E7D /* Pods-InstaTrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTrip.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip.release.xcconfig"; sourceTree = "<group>"; };
 		2E43A5451FF02F60009927BE /* InstaTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E43A5481FF02F60009927BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E43A54A1FF02F60009927BE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +57,12 @@
 		2E43A5661FF02F61009927BE /* InstaTripUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstaTripUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E43A56A1FF02F61009927BE /* InstaTripUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaTripUITests.swift; sourceTree = "<group>"; };
 		2E43A56C1FF02F61009927BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E43A5781FF0462E009927BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8CBA8FC3242AEC49FD1AAC0F /* Pods-InstaTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests.release.xcconfig"; sourceTree = "<group>"; };
+		C933A9147CC79CEFC2ED04AB /* Pods-InstaTripUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripUITests/Pods-InstaTripUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D49CDE53645E47CC10EB27A6 /* Pods-InstaTripTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E54A73BE2155ED4F569421A4 /* Pods-InstaTripUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripUITests/Pods-InstaTripUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		ED87338CB75431968C7F0AD6 /* Pods_InstaTripTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaTripTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB87138B5C7BAF64DD6F349B /* Pods_InstaTrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E31289B00BCB89EB0375F2C /* Pods_InstaTripTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43061015DB7FFF677D148D47 /* Pods_InstaTripUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +100,8 @@
 				2E43A55E1FF02F61009927BE /* InstaTripTests */,
 				2E43A5691FF02F61009927BE /* InstaTripUITests */,
 				2E43A5461FF02F60009927BE /* Products */,
+				BF8C3C92FBBCE2A08D445E2E /* Pods */,
+				DDCCA805831F30051AA7CE80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +118,7 @@
 		2E43A5471FF02F60009927BE /* InstaTrip */ = {
 			isa = PBXGroup;
 			children = (
+				2E43A5781FF0462E009927BE /* GoogleService-Info.plist */,
 				2E43A5481FF02F60009927BE /* AppDelegate.swift */,
 				2E43A54A1FF02F60009927BE /* FirstViewController.swift */,
 				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
@@ -128,6 +148,29 @@
 			path = InstaTripUITests;
 			sourceTree = "<group>";
 		};
+		BF8C3C92FBBCE2A08D445E2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11F03C376BC6DE91E7295202 /* Pods-InstaTrip.debug.xcconfig */,
+				282B22731446655EF53D9E7D /* Pods-InstaTrip.release.xcconfig */,
+				D49CDE53645E47CC10EB27A6 /* Pods-InstaTripTests.debug.xcconfig */,
+				8CBA8FC3242AEC49FD1AAC0F /* Pods-InstaTripTests.release.xcconfig */,
+				E54A73BE2155ED4F569421A4 /* Pods-InstaTripUITests.debug.xcconfig */,
+				C933A9147CC79CEFC2ED04AB /* Pods-InstaTripUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DDCCA805831F30051AA7CE80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CDE0838092592DF5EF13837 /* Pods_InstaTrip.framework */,
+				ED87338CB75431968C7F0AD6 /* Pods_InstaTripTests.framework */,
+				20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E43A56F1FF02F61009927BE /* Build configuration list for PBXNativeTarget "InstaTrip" */;
 			buildPhases = (
+				6BEC5922A343B65A0281A8F0 /* [CP] Check Pods Manifest.lock */,
 				2E43A5411FF02F5F009927BE /* Sources */,
 				2E43A5421FF02F5F009927BE /* Frameworks */,
 				2E43A5431FF02F5F009927BE /* Resources */,
+				8E3476C89EDBAE9E1A20988F /* [CP] Embed Pods Frameworks */,
+				27A11662A2CBA499BFB20790 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E43A5721FF02F61009927BE /* Build configuration list for PBXNativeTarget "InstaTripTests" */;
 			buildPhases = (
+				921F5ED5C184E6DB71309EFA /* [CP] Check Pods Manifest.lock */,
 				2E43A5571FF02F61009927BE /* Sources */,
 				2E43A5581FF02F61009927BE /* Frameworks */,
 				2E43A5591FF02F61009927BE /* Resources */,
+				F3A4E518CD5DD64EE5A7579C /* [CP] Embed Pods Frameworks */,
+				467A9421472C3E133FF6CA3B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +219,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E43A5751FF02F61009927BE /* Build configuration list for PBXNativeTarget "InstaTripUITests" */;
 			buildPhases = (
+				E380BC5C2DD14B8C862B511C /* [CP] Check Pods Manifest.lock */,
 				2E43A5621FF02F61009927BE /* Sources */,
 				2E43A5631FF02F61009927BE /* Frameworks */,
 				2E43A5641FF02F61009927BE /* Resources */,
+				7BFABEB6DEE44EF121F429BC /* [CP] Embed Pods Frameworks */,
+				ABBB244F3DD242D07B8EAAF5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E43A5551FF02F60009927BE /* LaunchScreen.storyboard in Resources */,
+				2E43A5791FF0462E009927BE /* GoogleService-Info.plist in Resources */,
 				2E43A5521FF02F60009927BE /* Assets.xcassets in Resources */,
 				2E43A5501FF02F60009927BE /* Main.storyboard in Resources */,
 			);
@@ -256,6 +309,158 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27A11662A2CBA499BFB20790 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		467A9421472C3E133FF6CA3B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6BEC5922A343B65A0281A8F0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstaTrip-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BFABEB6DEE44EF121F429BC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTripUITests/Pods-InstaTripUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E3476C89EDBAE9E1A20988F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		921F5ED5C184E6DB71309EFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstaTripTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABBB244F3DD242D07B8EAAF5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTripUITests/Pods-InstaTripUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E380BC5C2DD14B8C862B511C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InstaTripUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3A4E518CD5DD64EE5A7579C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E43A5411FF02F5F009927BE /* Sources */ = {
@@ -414,6 +619,7 @@
 		};
 		2E43A5701FF02F61009927BE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11F03C376BC6DE91E7295202 /* Pods-InstaTrip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = InstaTrip/Info.plist;
@@ -426,6 +632,7 @@
 		};
 		2E43A5711FF02F61009927BE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 282B22731446655EF53D9E7D /* Pods-InstaTrip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = InstaTrip/Info.plist;
@@ -438,6 +645,7 @@
 		};
 		2E43A5731FF02F61009927BE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D49CDE53645E47CC10EB27A6 /* Pods-InstaTripTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -452,6 +660,7 @@
 		};
 		2E43A5741FF02F61009927BE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CBA8FC3242AEC49FD1AAC0F /* Pods-InstaTripTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -466,6 +675,7 @@
 		};
 		2E43A5761FF02F61009927BE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E54A73BE2155ED4F569421A4 /* Pods-InstaTripUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = InstaTripUITests/Info.plist;
@@ -479,6 +689,7 @@
 		};
 		2E43A5771FF02F61009927BE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C933A9147CC79CEFC2ED04AB /* Pods-InstaTripUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = InstaTripUITests/Info.plist;
