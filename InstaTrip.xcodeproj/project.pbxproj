@@ -16,6 +16,7 @@
 		2E43A5601FF02F61009927BE /* InstaTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43A55F1FF02F61009927BE /* InstaTripTests.swift */; };
 		2E43A56B1FF02F61009927BE /* InstaTripUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43A56A1FF02F61009927BE /* InstaTripUITests.swift */; };
 		2E43A5791FF0462E009927BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E43A5781FF0462E009927BE /* GoogleService-Info.plist */; };
+		2EA30E051FF1731000D1F7BA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */; };
 		43061015DB7FFF677D148D47 /* Pods_InstaTripUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */; };
 		5E31289B00BCB89EB0375F2C /* Pods_InstaTripTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED87338CB75431968C7F0AD6 /* Pods_InstaTripTests.framework */; };
 		FB87138B5C7BAF64DD6F349B /* Pods_InstaTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDE0838092592DF5EF13837 /* Pods_InstaTrip.framework */; };
@@ -58,6 +59,7 @@
 		2E43A56A1FF02F61009927BE /* InstaTripUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaTripUITests.swift; sourceTree = "<group>"; };
 		2E43A56C1FF02F61009927BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E43A5781FF0462E009927BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8CBA8FC3242AEC49FD1AAC0F /* Pods-InstaTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests.release.xcconfig"; sourceTree = "<group>"; };
 		C933A9147CC79CEFC2ED04AB /* Pods-InstaTripUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripUITests/Pods-InstaTripUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D49CDE53645E47CC10EB27A6 /* Pods-InstaTripTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				2E43A54A1FF02F60009927BE /* FirstViewController.swift */,
 				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
 				2E43A54E1FF02F60009927BE /* Main.storyboard */,
+				2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */,
 				2E43A5511FF02F60009927BE /* Assets.xcassets */,
 				2E43A5531FF02F60009927BE /* LaunchScreen.storyboard */,
 				2E43A5561FF02F60009927BE /* Info.plist */,
@@ -381,11 +384,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -470,6 +475,7 @@
 				2E43A54D1FF02F60009927BE /* SecondViewController.swift in Sources */,
 				2E43A5491FF02F60009927BE /* AppDelegate.swift in Sources */,
 				2E43A54B1FF02F60009927BE /* FirstViewController.swift in Sources */,
+				2EA30E051FF1731000D1F7BA /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +726,7 @@
 				2E43A5711FF02F61009927BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E43A5721FF02F61009927BE /* Build configuration list for PBXNativeTarget "InstaTripTests" */ = {
 			isa = XCConfigurationList;
@@ -728,6 +735,7 @@
 				2E43A5741FF02F61009927BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2E43A5751FF02F61009927BE /* Build configuration list for PBXNativeTarget "InstaTripUITests" */ = {
 			isa = XCConfigurationList;
@@ -736,6 +744,7 @@
 				2E43A5771FF02F61009927BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

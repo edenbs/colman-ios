@@ -6,7 +6,8 @@ target 'InstaTrip' do
   use_frameworks!
 
   # Pods for InstaTrip
-  pod 'Firebase'  
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
 
   target 'InstaTripTests' do
     inherit! :search_paths
