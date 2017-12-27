@@ -41,10 +41,8 @@ class RegisterViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             else {
-                let alert = UIAlertController(title: "Success", message: "Account Created!!", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC")
+                self.present(vc!, animated: true, completion: nil)
             }
         }
     }
