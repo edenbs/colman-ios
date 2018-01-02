@@ -141,14 +141,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Describe Your Scene..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8ZF-z1-pft">
-                                <rect key="frame" x="16" y="216" width="324" height="188"/>
+                                <rect key="frame" x="25" y="126" width="324" height="188"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94770533376963351" green="0.94770533376963351" blue="0.94770533376963351" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
-                                <rect key="frame" x="302" y="595" width="31" height="30"/>
+                                <rect key="frame" x="318" y="617" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Post"/>
                                 <connections>
@@ -156,18 +156,32 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Add some tags to help people find your post" borderStyle="roundedRect" placeholder="Describe Your Scene..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-WD-Eib">
-                                <rect key="frame" x="16" y="435" width="324" height="30"/>
+                                <rect key="frame" x="25" y="353" width="324" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
+                                <rect key="frame" x="25" y="423" width="324" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy6-eo-xvi">
+                                <rect key="frame" x="135" y="472" width="105" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SELECT IMAGE"/>
+                                <connections>
+                                    <action selector="selectImageTapped:" destination="fyn-uQ-qUj" eventType="touchUpInside" id="aze-fq-vLW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="InstaTrip" id="aFU-fP-UPo"/>
                     <connections>
                         <outlet property="contentTextField" destination="8ZF-z1-pft" id="cOc-gW-TZy"/>
+                        <outlet property="previewImageView" destination="0t0-fI-ITV" id="z0d-RO-cfH"/>
+                        <outlet property="selectImageButton" destination="fy6-eo-xvi" id="nbt-Kq-LVI"/>
                         <outlet property="tagsTextField" destination="IYZ-WD-Eib" id="IYq-HK-2CH"/>
                     </connections>
                 </viewController>

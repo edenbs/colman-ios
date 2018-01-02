@@ -10,11 +10,18 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var tagsTextField: UITextField!
-
+    
+    var imageFileName = ""
+    
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var selectImageButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +40,8 @@ class PostViewController: UIViewController {
                     let postObject: Dictionary<String, Any> = [
                             "uid" : uid,
                             "tags" : tags,
-                            "content" : content
+                            "content" : content,
+                            "image" : imageFileName
                     ]
                     
                     // setValue deprecated?
@@ -49,6 +57,71 @@ class PostViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func selectImageTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+        
+    }
+    
+    func uploadImage(image: UIImage) {
+        let uuid = randomStringWithLength(length: 10)
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let uploadRef = Storage.storage().reference().child("Images/\(uuid).jpg")
+        let uploadTask = uploadRef.putData(imageData!,  metadata: nil) {
+            metadata, error in
+            if (error == nil) {
+                // SUCCESS
+                print("Successful!")
+                
+                self.imageFileName = "\(uuid as String).jpg"
+            }
+            else {
+                // ERROR
+                print("Error \(error?.localizedDescription)")
+            }
+        }
+        
+    }
+    
+    // Change to UUID!!!!!
+    func randomStringWithLength(length: Int) -> NSString{
+        // Casting to NSstring
+        let chars : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var randomString : NSMutableString = NSMutableString(capacity: length)
+        
+        for i in 0..<length {
+            var len = UInt32(chars.length)
+            
+            var rand = arc4random_uniform(len)
+            
+            randomString.appendFormat("%C", chars.character(at: Int(rand)))
+        }
+        
+        return randomString
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Run after user picks pic
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.previewImageView.image = pickedImage
+            self.selectImageButton.isEnabled = false
+            self.selectImageButton.isHidden = true
+            
+            uploadImage(image: pickedImage)
+            picker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // Will Run after user hits cancel
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
+    
 
     /*
     // MARK: - Navigation
