@@ -11,11 +11,11 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
-
-class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+import ProgressHUD
+class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate {
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var tagsTextField: UITextField!
-    
+
     var imageFileName = ""
     
     var selectedImage: UIImage?
@@ -26,7 +26,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.contentTextField.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -38,25 +38,57 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     // User wants to post
     @IBAction func postTapped(_ sender: Any) {
-        ProgressHUUD.show("Waiting", interaction: flase)
+        let PhotoIdString = NSUUID().uuidString
+        let uploadRef = Storage.storage().reference().child("Images/\(PhotoIdString).jpg")
         if let uid = Auth.auth().currentUser?.uid {
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
+
+        if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
+               (metadata,error) in
+                if let metadata = metadata{
+                    // A link to the photo
+                  print(metadata.downloadURL())
+                    
+                    print("GOOOOOODD")
+                   // ProgressHUD.dismiss()
+                    ProgressHUD.showSuccess()
                     let postObject: Dictionary<String, Any> = [
-                            "uid" : uid,
-                            "tags" : tags,
-                            "content" : content,
-                            "image" : imageFileName
+                        "uid" : uid,
+                        "tags" : tags,
+                        "content" : content,
+                        "image" : PhotoIdString+".jpg",
                     ]
-                    
-                    // setValue deprecated?
-                    Database.database().reference().child("posts").childByAutoId().setValue(postObject)
-                    
-                    print("Posted to Database")
-                    
+                     Database.database().reference().child("posts").childByAutoId().setValue(postObject)
+                }
+                else{
+                   print ("BYE")
+                    ProgressHUD.showError()
+                }
+            })
+            uploadTask.observe(.progress, handler: { (snapshot) in
+                guard let progress = snapshot.progress else {
+                    return
+                }
+                
+                let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
+                print(percentage)
+                ProgressHUD.show("Uploading", interaction: false)
+            })
+        }
+        else {
+            print("error")
+        }
                 }
             }
         }
+        
+        
+        
+      
     }
     
     
@@ -71,6 +103,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     // Upload the image to firebase
     func uploadImage(image: UIImage) {
+        print("INNNNN")
         let uuid = randomStringWithLength(length: 10)
         let imageData = UIImageJPEGRepresentation(image, 1.0)
         let uploadRef = Storage.storage().reference().child("Images/\(uuid).jpg")
@@ -81,9 +114,11 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                 print("Successful!")
                 
                 self.imageFileName = "\(uuid as String).jpg"
+                ProgressHUD.showSuccess("Successfuly uploaded!")
             }
             else {
                 // ERROR
+                return
                 print("Error \(error?.localizedDescription)")
             }
         }
@@ -120,9 +155,11 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
             self.selectImageButton.isHidden = true
             
-            selectedImage = pickedImage
+            self.tagsTextField.isEnabled = true
             
-            uploadImage(image: pickedImage)
+            self.selectedImage = pickedImage
+            
+           // uploadImage(image: pickedImage)
             picker.dismiss(animated: true, completion: nil)
         }
     }
@@ -132,8 +169,16 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         picker.dismiss(animated: true, completion: nil)
         
     }
+    internal func textViewDidBeginEditing(_ textView: UITextView) {
+         print("THIS IS SHIT!!!!!!!!!")
+        contentTextField.text = ""
+    }
+        
+    
+        
     
 
+    
     /*
     // MARK: - Navigation
 
