@@ -216,7 +216,7 @@
                                     <action selector="postTapped:" destination="fyn-uQ-qUj" eventType="touchUpInside" id="aey-e2-ffD"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
                                 <rect key="frame" x="19" y="86" width="381" height="274"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="0.096646420692737212" blue="0.079814028217605748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

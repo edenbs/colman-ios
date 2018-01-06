@@ -10,6 +10,7 @@ target 'InstaTrip' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'ProgressHUD'
 
   target 'InstaTripTests' do
     inherit! :search_paths

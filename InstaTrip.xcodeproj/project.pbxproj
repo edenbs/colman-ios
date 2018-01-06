@@ -19,8 +19,6 @@
 		2EB9958E1FF3FE350056A5BC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9958D1FF3FE350056A5BC /* PostViewController.swift */; };
 		43061015DB7FFF677D148D47 /* Pods_InstaTripUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */; };
 		4D7D73951FFD34D900AADDBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */; };
-		4D9AF9DD1FFFCD1100C26813 /* Deftone-Stylus in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9DC1FFFCD1100C26813 /* Deftone-Stylus */; };
-		4D9AF9DF1FFFCE8400C26813 /* george-williams_parisish in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9DE1FFFCE8400C26813 /* george-williams_parisish */; };
 		4D9AF9E21FFFCF8800C26813 /* DEFTONE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */; };
 		4D9AF9E31FFFCF8800C26813 /* Parisish.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */; };
 		5E31289B00BCB89EB0375F2C /* Pods_InstaTripTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED87338CB75431968C7F0AD6 /* Pods_InstaTripTests.framework */; };
@@ -66,8 +64,6 @@
 		2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		2EB9958D1FF3FE350056A5BC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4D9AF9DC1FFFCD1100C26813 /* Deftone-Stylus */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Deftone-Stylus"; sourceTree = "<group>"; };
-		4D9AF9DE1FFFCE8400C26813 /* george-williams_parisish */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "george-williams_parisish"; sourceTree = "<group>"; };
 		4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DEFTONE.ttf; sourceTree = "<group>"; };
 		4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Parisish.ttf; sourceTree = "<group>"; };
 		8CBA8FC3242AEC49FD1AAC0F /* Pods-InstaTripTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaTripTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaTripTests/Pods-InstaTripTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,17 +126,12 @@
 		2E43A5471FF02F60009927BE /* InstaTrip */ = {
 			isa = PBXGroup;
 			children = (
+				4D35C1E320012877005E2128 /* Controller */,
 				4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */,
 				4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */,
-				4D9AF9DE1FFFCE8400C26813 /* george-williams_parisish */,
-				4D9AF9DC1FFFCD1100C26813 /* Deftone-Stylus */,
 				4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */,
 				2E43A5481FF02F60009927BE /* AppDelegate.swift */,
-				2E43A54A1FF02F60009927BE /* FirstViewController.swift */,
-				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
 				2E43A54E1FF02F60009927BE /* Main.storyboard */,
-				2EB9958D1FF3FE350056A5BC /* PostViewController.swift */,
-				2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */,
 				2E43A5511FF02F60009927BE /* Assets.xcassets */,
 				2E43A5531FF02F60009927BE /* LaunchScreen.storyboard */,
 				2E43A5561FF02F60009927BE /* Info.plist */,
@@ -164,6 +155,17 @@
 				2E43A56C1FF02F61009927BE /* Info.plist */,
 			);
 			path = InstaTripUITests;
+			sourceTree = "<group>";
+		};
+		4D35C1E320012877005E2128 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EB9958D1FF3FE350056A5BC /* PostViewController.swift */,
+				2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */,
+				2E43A54A1FF02F60009927BE /* FirstViewController.swift */,
+				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		BF8C3C92FBBCE2A08D445E2E /* Pods */ = {
@@ -307,11 +309,9 @@
 			files = (
 				4D9AF9E21FFFCF8800C26813 /* DEFTONE.ttf in Resources */,
 				4D9AF9E31FFFCF8800C26813 /* Parisish.ttf in Resources */,
-				4D9AF9DD1FFFCD1100C26813 /* Deftone-Stylus in Resources */,
 				2E43A5551FF02F60009927BE /* LaunchScreen.storyboard in Resources */,
 				4D7D73951FFD34D900AADDBC /* GoogleService-Info.plist in Resources */,
 				2E43A5521FF02F60009927BE /* Assets.xcassets in Resources */,
-				4D9AF9DF1FFFCE8400C26813 /* george-williams_parisish in Resources */,
 				2E43A5501FF02F60009927BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +405,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-InstaTrip/Pods-InstaTrip-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -412,6 +413,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

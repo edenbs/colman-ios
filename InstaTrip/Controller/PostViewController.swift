@@ -18,6 +18,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     var imageFileName = ""
     
+    var selectedImage: UIImage?
+    
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var selectImageButton: UIButton!
     
@@ -33,7 +35,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // User wants to post
     @IBAction func postTapped(_ sender: Any) {
+        ProgressHUUD.show("Waiting", interaction: flase)
         if let uid = Auth.auth().currentUser?.uid {
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
@@ -50,22 +55,21 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                     print("Posted to Database")
                     
                 }
-
-                
             }
-            
         }
-        
     }
     
+    
+    // User clicked upload image.
     @IBAction func selectImageTapped(_ sender: Any) {
         let picker = UIImagePickerController()
         
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
-        
     }
     
+    
+    // Upload the image to firebase
     func uploadImage(image: UIImage) {
         let uuid = randomStringWithLength(length: 10)
         let imageData = UIImageJPEGRepresentation(image, 1.0)
@@ -86,7 +90,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
     }
     
-    // Change to UUID!!!!!
+    // Change to UUID!!!!! LIKE THIS:
+    // let a = NSUUID().uuidString
     func randomStringWithLength(length: Int) -> NSString{
         // Casting to NSstring
         let chars : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -103,13 +108,19 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         return randomString
     }
     
-    
+    // The image picker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // Run after user picks pic
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.previewImageView.image = pickedImage
+            
+            // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
             self.selectImageButton.isEnabled = false
+            
+            // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
             self.selectImageButton.isHidden = true
+            
+            selectedImage = pickedImage
             
             uploadImage(image: pickedImage)
             picker.dismiss(animated: true, completion: nil)
