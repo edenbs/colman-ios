@@ -9,6 +9,7 @@
 import XCTest
 @testable import InstaTrip
 
+
 class InstaTripTests: XCTestCase {
     
     override func setUp() {

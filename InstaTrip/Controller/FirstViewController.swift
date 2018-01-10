@@ -24,6 +24,18 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        //Check if user is already signed in.
+        if Auth.auth().currentUser != nil {
+            // user is loggedin
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+            self.present(vc!, animated: false, completion:nil )
+            
+        }
+        
+    }
 
     @IBAction func signInTapped(_ sender: Any) {
         let username = usernameTextField.text
@@ -37,10 +49,10 @@ class FirstViewController: UIViewController {
             }
             else {
                 // success
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
                 self.present(vc!, animated: true, completion: nil)
             }
-        };
+        }
     }
     
     @IBAction func backFromRegister(unwindSegue: UIStoryboardSegue) {
