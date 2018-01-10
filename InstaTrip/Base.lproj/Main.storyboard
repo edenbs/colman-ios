@@ -24,7 +24,7 @@
         <!--Home-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="InstaTrip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="9pv-A4-QxB" customClass="FirstViewController" customModule="InstaTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -144,7 +144,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rQg-5N-oGg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rQg-5N-oGg">
                                 <rect key="frame" x="77" y="178" width="221" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -175,18 +175,26 @@
                                     <segue destination="VIv-20-fVD" kind="unwind" unwindAction="backFromRegisterWithUnwindSegue:" id="gam-dM-h0V"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RR4-Sm-kO2">
+                                <rect key="frame" x="77" y="115" width="221" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="rQg-5N-oGg" id="L6o-vU-V4j"/>
                         <outlet property="passwordTextField" destination="EoZ-p9-LGU" id="E6T-FL-1NX"/>
-                        <outlet property="usernameTextField" destination="rQg-5N-oGg" id="bVB-xT-r2Y"/>
+                        <outlet property="usernameTextField" destination="RR4-Sm-kO2" id="U6x-2v-gmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSR-Hh-KEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="VIv-20-fVD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="141.59999999999999" y="18.440779610194905"/>
+            <point key="canvasLocation" x="140.57971014492756" y="17.934782608695652"/>
         </scene>
         <!--InstaTrip-->
         <scene sceneID="EYu-uu-96s">
@@ -261,12 +269,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVA-mD-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="r5K-rk-iZW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4367" y="494"/>
+            <point key="canvasLocation" x="4341" y="493"/>
         </scene>
-        <!--InstaTrip-->
+        <!--INSTA!-->
         <scene sceneID="PqP-2d-f7P">
             <objects>
-                <viewController storyboardIdentifier="MainVC" id="Egq-2r-8wp" customClass="MainViewController" customModule="InstaTrip" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="Egq-2r-8wp" customClass="MainViewController" customModule="InstaTrip" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xeo-K2-rlp"/>
                         <viewControllerLayoutGuide type="bottom" id="Zdn-Xe-SFK"/>
@@ -275,8 +283,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="386" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RgN-x4-OFb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="386" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RgN-x4-OFb">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" showsReorderControl="YES" indentationLevel="1" indentationWidth="40" shouldIndentWhileEditing="NO" reuseIdentifier="Cell" rowHeight="386" id="Oyh-a6-OPv" customClass="PostTableViewCell" customModule="InstaTrip">
@@ -286,25 +295,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="385.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Content" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-XE-lDv">
-                                                    <rect key="frame" x="63" y="225" width="275" height="76"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ege-aD-zC5">
                                                     <rect key="frame" x="65" y="50" width="285" height="184"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.72368282079696655" green="0.39825040102005005" blue="0.91000181436538696" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7T-Z3-GSx">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7T-Z3-GSx">
                                                     <rect key="frame" x="0.0" y="0.0" width="371" height="63"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Content" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-XE-lDv">
+                                                    <rect key="frame" x="96" y="283" width="275" height="76"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -317,17 +326,16 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.58177953958511353" green="0.085776694118976593" blue="0.30833566188812256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="RgN-x4-OFb" firstAttribute="top" secondItem="xeo-K2-rlp" secondAttribute="bottom" id="E0q-Wi-B6E"/>
-                            <constraint firstItem="Zdn-Xe-SFK" firstAttribute="top" secondItem="RgN-x4-OFb" secondAttribute="bottom" id="fqO-5O-t96"/>
-                            <constraint firstAttribute="trailing" secondItem="RgN-x4-OFb" secondAttribute="trailing" id="kXi-a6-AoP"/>
-                            <constraint firstItem="RgN-x4-OFb" firstAttribute="leading" secondItem="pdj-3l-KWn" secondAttribute="leading" id="oJ7-gf-0oA"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="InstaTrip" id="Knz-ad-PlG">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="KC7-LN-tZx">
+                    <navigationItem key="navigationItem" title="INSTA!" largeTitleDisplayMode="always" id="I8L-U1-ngQ">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="RpK-2Q-sXH">
                             <connections>
-                                <segue destination="QBf-Yk-jyM" kind="show" id="Mj5-qp-tSH"/>
+                                <action selector="logoutTapped:" destination="Egq-2r-8wp" id="9Cx-5g-mo6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="QQ3-b5-Wzg">
+                            <connections>
+                                <segue destination="QBf-Yk-jyM" kind="show" animates="NO" id="JDr-sm-CbP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -337,13 +345,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mJ-fE-PEH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730.434782608696" y="473.64130434782612"/>
+            <point key="canvasLocation" x="2705.7971014492755" y="473.64130434782612"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RRO-I8-jPb">
             <objects>
                 <navigationController storyboardIdentifier="PostVC" automaticallyAdjustsScrollViewInsets="NO" id="QBf-Yk-jyM" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="frU-EC-lqB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GTf-cB-mDO">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -360,13 +369,18 @@
         <!--Navigation Controller-->
         <scene sceneID="07p-T9-hb0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fe7-QQ-Stg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainVC" automaticallyAdjustsScrollViewInsets="NO" id="Fe7-QQ-Stg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Md4-B9-6TV">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Md4-B9-6TV">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6vp-RT-FXc">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Egq-2r-8wp" kind="relationship" relationship="rootViewController" id="ear-Wo-wDC"/>
                     </connections>

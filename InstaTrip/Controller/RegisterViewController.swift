@@ -13,6 +13,7 @@ import FirebaseAuth
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
     override func viewDidLoad() {
@@ -28,10 +29,11 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func createAccountTapped(_ sender: Any) {
-        let username = usernameTextField.text
+        let email = emailTextField.text
         let password = passwordTextField.text
+        let username = usernameTextField.text
         
-        Auth.auth().createUser(withEmail: username!, password: password!) { (user, err) in
+        Auth.auth().createUser(withEmail: email!, password: password!) { (user, err) in
             if (err != nil) {
                 // Error creating account
                 let errorMsg = err?.localizedDescription
@@ -41,8 +43,18 @@ class RegisterViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             else {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostVC")
-                self.present(vc!, animated: true, completion: nil)
+                if let uid = Auth.auth().currentUser?.uid{
+                     let userRef = Database.database().reference().child("users").child(uid)
+                    let object = ["username": username]
+                    userRef.setValue(userRef)
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                    self.present(vc!, animated: true, completion: nil)
+                }
+                else{
+                    print("THIS IS NOT WORKING!!!!!")
+                }
+               
+               
             }
         }
     }

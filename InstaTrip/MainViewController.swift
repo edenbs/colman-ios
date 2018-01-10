@@ -16,13 +16,19 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
    
     @IBOutlet weak var postTableView: UITableView!
     
-   // @IBOutlet weak var postsTableView: UITableView!
+    
+   
+    // @IBOutlet weak var postsTableView: UITableView!
     var posts = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
+        //self.tabBarController?.navigationItem.title="Profile Settings"
+ 
         
+       
+      
         loadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -109,6 +115,21 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         // Rewind from Post screen
     }
 
+    
+    @IBAction func logoutTapped(_ sender: Any) {
+        
+        // TODO: Check do try catch syntax
+        do {
+            try Auth.auth().signOut()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+            self.present(vc!, animated: true, completion: nil)
+            
+            
+        } catch{
+            print("ERROR SIGNING OUT USER!")
+            
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
