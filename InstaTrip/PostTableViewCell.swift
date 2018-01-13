@@ -26,5 +26,10 @@ class PostTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+  /*  override func prepareForReuse() {
+        super.prepareForReuse()
+        self.postImageView.image = nil
+        // Set cell to initial state here, reset or set values
+    }*/
 
 }

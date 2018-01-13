@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
                 if let uid = Auth.auth().currentUser?.uid{
                      let userRef = Database.database().reference().child("users").child(uid)
                     let object = ["username": username]
-                    userRef.setValue(userRef)
+                    userRef.setValue(object)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
                     self.present(vc!, animated: true, completion: nil)
                 }

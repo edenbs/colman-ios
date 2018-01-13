@@ -177,7 +177,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
         
     
-
+   
     
     /*
     // MARK: - Navigation

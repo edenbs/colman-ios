@@ -18,6 +18,9 @@
 		2EA30E051FF1731000D1F7BA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */; };
 		2EB9958E1FF3FE350056A5BC /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9958D1FF3FE350056A5BC /* PostViewController.swift */; };
 		43061015DB7FFF677D148D47 /* Pods_InstaTripUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20ECA8BC7FA52B51E8888A03 /* Pods_InstaTripUITests.framework */; };
+		4D6A8A8E200A421500FCA07F /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A8D200A421500FCA07F /* Extentions.swift */; };
+		4D6A8A91200A4B1400FCA07F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A90200A4B1400FCA07F /* User.swift */; };
+		4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A92200A4C0500FCA07F /* Post.swift */; };
 		4D7D73951FFD34D900AADDBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */; };
 		4D9AF9E21FFFCF8800C26813 /* DEFTONE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */; };
 		4D9AF9E31FFFCF8800C26813 /* Parisish.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */; };
@@ -65,6 +68,9 @@
 		2E43A56C1FF02F61009927BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		2EB9958D1FF3FE350056A5BC /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		4D6A8A8D200A421500FCA07F /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		4D6A8A90200A4B1400FCA07F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4D6A8A92200A4C0500FCA07F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DEFTONE.ttf; sourceTree = "<group>"; };
 		4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Parisish.ttf; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 		2E43A5471FF02F60009927BE /* InstaTrip */ = {
 			isa = PBXGroup;
 			children = (
+				4D6A8A8F200A4B0000FCA07F /* Model */,
+				4D6A8A8A200A41CA00FCA07F /* Helpers */,
 				4D35C1E320012877005E2128 /* Controller */,
 				4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */,
 				4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */,
@@ -172,6 +180,23 @@
 				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		4D6A8A8A200A41CA00FCA07F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4D6A8A8D200A421500FCA07F /* Extentions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4D6A8A8F200A4B0000FCA07F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D6A8A90200A4B1400FCA07F /* User.swift */,
+				4D6A8A92200A4C0500FCA07F /* Post.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BF8C3C92FBBCE2A08D445E2E /* Pods */ = {
@@ -505,9 +530,12 @@
 				2E43A54D1FF02F60009927BE /* SecondViewController.swift in Sources */,
 				2E43A5491FF02F60009927BE /* AppDelegate.swift in Sources */,
 				2E43A54B1FF02F60009927BE /* FirstViewController.swift in Sources */,
+				4D6A8A8E200A421500FCA07F /* Extentions.swift in Sources */,
+				4D6A8A91200A4B1400FCA07F /* User.swift in Sources */,
 				2EA30E051FF1731000D1F7BA /* RegisterViewController.swift in Sources */,
 				2EB9958E1FF3FE350056A5BC /* PostViewController.swift in Sources */,
 				4DBF4F1720052ADC00742084 /* PostTableViewCell.swift in Sources */,
+				4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
