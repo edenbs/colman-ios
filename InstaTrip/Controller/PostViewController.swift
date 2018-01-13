@@ -98,6 +98,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
+        
+        
+        
+        
     }
     
     
@@ -115,6 +119,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                 
                 self.imageFileName = "\(uuid as String).jpg"
                 ProgressHUD.showSuccess("Successfuly uploaded!")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                self.present(vc!, animated: true, completion: nil)
             }
             else {
                 // ERROR

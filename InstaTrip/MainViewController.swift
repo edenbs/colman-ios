@@ -50,6 +50,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                 
                 self.posts.append(post)
             }
+         
         })
         
         
@@ -69,11 +70,6 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                 self.postTableView.reloadData()
             }
         })
-        
-        
-        //   })
-        
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -153,5 +149,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         }
     }
   
+    internal override func viewWillAppear(_ animated: Bool) {
+         self.postTableView.reloadData()
+    }
+    
     
 }
