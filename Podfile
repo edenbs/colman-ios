@@ -11,6 +11,8 @@ target 'InstaTrip' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'ProgressHUD'
+  pod 'SQLite.swift', '~> 0.11.4'
+  pod ‘ReachabilitySwift’, ‘~> 3’
 
   target 'InstaTripTests' do
     inherit! :search_paths

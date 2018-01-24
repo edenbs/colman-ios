@@ -17,6 +17,11 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        FirebaseModel.getUsers { (response) in
+            
+        
+         
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,10 +35,14 @@ class FirstViewController: UIViewController {
         //Check if user is already signed in.
         if Auth.auth().currentUser != nil {
             // user is loggedin
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
             self.present(vc!, animated: false, completion:nil )
             
         }
+        super.viewDidAppear(animated)
+        
+        // Show keyboard by default
+        
         
     }
 
@@ -49,7 +58,7 @@ class FirstViewController: UIViewController {
             }
             else {
                 // success
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
                 self.present(vc!, animated: true, completion: nil)
             }
         }
@@ -58,5 +67,6 @@ class FirstViewController: UIViewController {
     @IBAction func backFromRegister(unwindSegue: UIStoryboardSegue) {
         // Rewind from register screen
     }
+    
 }
 

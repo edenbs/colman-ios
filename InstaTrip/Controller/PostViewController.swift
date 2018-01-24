@@ -6,30 +6,70 @@
 //  Copyright © 2017 Eden Ben Shoshan. All rights reserved.
 //
 
+
+// TODO : check if user did not pick an image - if he didnt pick do not let him post!!!! BAD!!
+// TODO: add a message that says that upload is done, if done user needs to say ok. only then go to the next page.
 import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import ProgressHUD
-class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate {
+import SystemConfiguration
+import SQLite
+import ReachabilitySwift
+
+class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate, NetworkStatusListener {
+    func networkStatusDidChange(status: Reachability.NetworkStatus) {
+        switch status {
+        case .notReachable:
+            debugPrint("ViewController: Network became unreachable")
+        case .reachableViaWiFi:
+            debugPrint("ViewController: Network reachable through WiFi")
+        case .reachableViaWWAN:
+            debugPrint("ViewController: Network reachable through Cellular Data")
+        }
+
+    }
+    
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var tagsTextField: UITextField!
-
+    
+    
     var imageFileName = ""
     
     var selectedImage: UIImage?
     
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var selectImageButton: UIButton!
+    var database: Connection!
     
+    
+    let uid = Expression<String>("uid")
+    let tags = Expression<String>("tags")
+    let content = Expression<String>("content")
+    let imageData = Expression<Data>("imageData")
+    let id = Expression<Int>("id")
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        do {
+            let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
+            let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
+            let database = try Connection(fileUrl.path)
+            self.database = database
+           // createTable()
+        } catch {
+            print (error)
+        }
+        
         self.contentTextField.delegate = self
         // Do any additional setup after loading the view.
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,52 +83,68 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         if let uid = Auth.auth().currentUser?.uid {
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
-
-        if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
-               (metadata,error) in
-                if let metadata = metadata{
-                    // A link to the photo
-                  print(metadata.downloadURL())
                     
-                    print("GOOOOOODD")
-                   // ProgressHUD.dismiss()
-                    ProgressHUD.showSuccess()
-                    let postObject: Dictionary<String, Any> = [
-                        "uid" : uid,
-                        "tags" : tags,
-                        "content" : content,
-                        "image" : PhotoIdString+".jpg",
-                    ]
-                     Database.database().reference().child("posts").childByAutoId().setValue(postObject)
-                }
-                else{
-                   print ("BYE")
-                    ProgressHUD.showError()
-                }
-            })
-            uploadTask.observe(.progress, handler: { (snapshot) in
-                guard let progress = snapshot.progress else {
-                    return
-                }
-                
-                let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
-                print(percentage)
-                ProgressHUD.show("Uploading", interaction: false)
-            })
-        }
-        else {
-            print("error")
-        }
+                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
+                        
+                        
+                        //  let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+                        //  print(strBase64)
+                        
+                        //  let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
+                        // let decodedimage = UIImage(data: dataDecoded)
+                        // print("this is the decoded: \(decodedimage) this is the org \(selectedImage)")
+                        
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpeg"
+                        //TEMP
+                        //  let imageDataa = UIImageJPEGRepresentation(decodedimage!, 0.1)
+                        let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
+                            (metadata,error) in
+                            if let metadata = metadata{
+                                // A link to the photo
+                                print(metadata.downloadURL())
+                                
+                                print("GOOOOOODD")
+                                
+                                
+                                
+                                
+                                let postObject: Dictionary<String, Any> = [
+                                    "uid" : uid,
+                                    "tags" : tags,
+                                    "content" : content,
+                                    "image" : PhotoIdString+".jpg",
+                                    ]
+                                Database.database().reference().child("posts").childByAutoId().setValue(postObject)
+                                ProgressHUD.showSuccess("Uploaded successfully", interaction: true)
+                                self.tabBarController?.selectedIndex = 0
+                            }
+                            else{
+                                print ("BYE")
+                                ProgressHUD.showError()
+                            }
+                        })
+                        uploadTask.observe(.progress, handler: { (snapshot) in
+                            guard let progress = snapshot.progress else {
+                                return
+                            }
+                            
+                            let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
+                            print(percentage)
+                            ProgressHUD.show("Uploading", interaction: false)
+                            
+                        })
+                    }
+                    else {
+                        print("error")
+                    }
                 }
             }
         }
         
         
         
-      
+        
     }
     
     
@@ -105,31 +161,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     }
     
     
-    // Upload the image to firebase
-    func uploadImage(image: UIImage) {
-        print("INNNNN")
-        let uuid = randomStringWithLength(length: 10)
-        let imageData = UIImageJPEGRepresentation(image, 1.0)
-        let uploadRef = Storage.storage().reference().child("Images/\(uuid).jpg")
-        let uploadTask = uploadRef.putData(imageData!,  metadata: nil) {
-            metadata, error in
-            if (error == nil) {
-                // SUCCESS
-                print("Successful!")
-                
-                self.imageFileName = "\(uuid as String).jpg"
-                ProgressHUD.showSuccess("Successfuly uploaded!")
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                self.present(vc!, animated: true, completion: nil)
-            }
-            else {
-                // ERROR
-                return
-                print("Error \(error?.localizedDescription)")
-            }
-        }
-        
-    }
+    
     
     // Change to UUID!!!!! LIKE THIS:
     // let a = NSUUID().uuidString
@@ -165,7 +197,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             
             self.selectedImage = pickedImage
             
-           // uploadImage(image: pickedImage)
+            // uploadImage(image: pickedImage)
             picker.dismiss(animated: true, completion: nil)
         }
     }
@@ -176,23 +208,77 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
     }
     internal func textViewDidBeginEditing(_ textView: UITextView) {
-         print("THIS IS SHIT!!!!!!!!!")
+        print("THIS IS SHIT!!!!!!!!!")
         contentTextField.text = ""
     }
-        
     
+    func isInternetAvailable() -> Bool
+    {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
         
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
     
-   
+    
+    internal override func viewDidAppear(_ animated: Bool) {
+        if (isInternetAvailable() == false) {
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "YOU ARE NOT CONNECTED TO THE INTERNET!!!", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+   /* @IBAction func createTable(){
+        let createTable = self.offlinePostsTable.create(ifNotExists: true)  { (table) in
+            table.column(self.id, primaryKey: true)
+            table.column(self.imageData)
+            table.column(self.uid)
+            table.column(self.tags)
+            table.column(self.content)
+        }
+        do {
+            try database.run(createTable)
+            print("Successfully created the table!")
+        }catch {
+            print(error)
+        }
+    }*/
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ReachabilityManager.shared.addListener(listener: self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ReachabilityManager.shared.removeListener(listener: self)
+    }
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

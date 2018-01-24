@@ -13,5 +13,14 @@ class Post: NSObject {
     var tags: String?
     var uid: String?
     
-    
+    override init(){
+        
+        print("YEYYYYY!!")
+        
+        
+      //  
+        
+        
+    }
 }
+
