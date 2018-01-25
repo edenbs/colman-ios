@@ -40,14 +40,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     var users = [String:AnyObject]()
     var usersListUp = User()
     var usersA = [String:AnyObject]()
+    var networkStat = Int()
     
-    var database: Connection!
-    let offlinePostsTable = Table("offlinePostsTable")
-    let uid = Expression<String>("uid")
-    let tags = Expression<String>("tags")
-    let content = Expression<String>("content")
-    let imageData = Expression<String>("imageData")
-    let id = Expression<Int>("id")
+    
     
     
     
@@ -69,6 +64,13 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive(notification:)),
+            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            object: nil)
+        
+        
         /*  do {
          let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
          let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
@@ -86,7 +88,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         posts.removeAll()
         currPosts.removeAll()
-      
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
             //  self.loadData()
         })
@@ -100,16 +102,18 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     // Adding - when loading data, each time it will write also to the db.
     // it will try to download new photos only if we are connected to the internet,
     func loadData(){
+        // 0 NO net
+        self.networkStat = ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
         
         
         currPosts.removeAll()
         posts.removeAll()
         SqlPostsModel.connectDB()
-        SqlPostsModel.delAll()
-        SqlPostsModel.createTable()
+        //SqlPostsModel.delAll()
         
-        SqlPostsModel.insertPost()
-         SqlPostsModel.delAll()
+        
+        
+        //   SqlPostsModel.delAll()
         print("in load data")
         
         // Run only if internet connection is available.
@@ -124,206 +128,212 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
          self.currPosts = self.posts
          
          })*/
-       FirebaseModel.getPosts{ (response) in
+        if (self.networkStat != 0)
+        {
+            print("inside the net")
+            FirebaseModel.getPosts{ (response) in
+                
+                guard  let postsA = response as? [Post] else {return}
+                //  print("This is the users list and response\(usersList) \(response)")
+                self.posts = postsA
+                self.currPosts = self.posts
+                
+            }
+            FirebaseModel.getUsers { (response) in
+                
+                guard  let usersA = response  as? [String : AnyObject] else {return}
+                //  print("This is the users list and response\(usersList) \(response)")
+                self.users = usersA
+                self.postTableView.reloadData()
+            }
             
-            guard  let postsA = response as? [Post] else {return}
-            //  print("This is the users list and response\(usersList) \(response)")
-            self.posts = postsA
+        }
+        else {
+            print("inside the  NOT net")
+            self.posts = PostOffline().listPosts(database: SqlPostsModel.database!)
+                //SqlPostsModel.listPosts()
             self.currPosts = self.posts
             
         }
         
-        // self.posts =
-        
-        
-        FirebaseModel.getUsers { (response) in
-            
-            guard  let usersA = response  as? [String : AnyObject] else {return}
-            //  print("This is the users list and response\(usersList) \(response)")
-            self.users = usersA
-            self.postTableView.reloadData()
-        }
-       // var apo = [Post]()
-        
-       
-        self.shits = SqlPostsModel.listPosts()
-        for shit in SqlPostsModel.listPosts() {
-            print("this is in shits")
-            print(shit.content)
-        }
-        self.posts = SqlPostsModel.listPosts()
-        self.currPosts = self.posts
-        print("shits \(shits.count)")
-        //print("this is the amount AAA\(.count)")
-        
-
-        }
-        
-        override func didReceiveMemoryWarning() {
-            print("MEMEOO")
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
-        }
         
         
         
-        func numberOfSections(in tableView: UITableView) -> Int {
-            
-            
-            return 1
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            // insertPost()
-            return self.currPosts.count
-        }
-        
-        
-        // Indexpath is the counter of the current row
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            print("in table view")
-            //loadData()
-            // self.postTableView.reloadData()
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
-            
-            // Configure the cell...
-            //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
-            
-            let post = self.currPosts[indexPath.row]
-            print("posts \(post.image)")
-            let user = self.users[post.uid!] as AnyObject
-            
-            cell.titleLable.text = user["username"] as? String
-            
-            
-            
-            //print("USEERRRR: \(Auth.auth().currentUser?.displayName)")
-            cell.contentTextView.text = post.content
-            let imageName = post.image
-            let imageRef = Storage.storage().reference().child("Images/\(imageName!)")
-            
-            
-            //1024*1024 is one megabyte and we want 25 megabyte
-            print("This is the ref: \(imageRef)")
-            
-            
-            
-            cell.titleLable.alpha = 0
-            cell.contentTextView.alpha = 0
-            cell.postImageView.alpha = 0
-            
-            UIView.animate(withDuration: 0.4, animations: {
-                cell.titleLable.alpha = 1
-                cell.contentTextView.alpha = 1
-                cell.postImageView.alpha = 1
-                
-                
-            })
-            cell.postImageView.downloadImageToCache(imageName: imageName!)
-            return cell
-        }
-        
-        @IBAction func backFromPost(unwindSegue: UIStoryboardSegue) {
-            // Rewind from Post screen
-        }
-        @IBAction func backFromProfile(unwindSegue: UIStoryboardSegue) {
-            // Rewind from Post screen
-        }
-        
-        
-        @IBAction func logoutTapped(_ sender: Any) {
-            
-            // TODO: Check do try catch syntax
-            do {
-                try Auth.auth().signOut()
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
-                self.present(vc!, animated: true, completion: nil)
-                
-            } catch{
-                print("ERROR SIGNING OUT USER!")
-                
-            }
-        }
-        
-        internal override func viewDidAppear(_ animated: Bool) {
-            
-            self.loadData()
-            
-            
-            
-        }
-        
-        private func setUpSearchBar(){
-            
-        }
-        internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            print("inside search")
-            guard !searchText.isEmpty else {
-                currPosts = posts
-                postTableView.reloadData()
-                return
-            }
-            currPosts = posts.filter({post -> Bool in
-                return  post.content!.contains(searchText)
-            })
-            print(currPosts)
-            postTableView.reloadData()
-            
-        }
-        func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-            
-        }
-        func networkStatusDidChange(status: Reachability.NetworkStatus) {
-            switch status {
-            case .notReachable:
-                debugPrint("ViewController: Network became unreachable")
-                let alertController = UIAlertController(title: "iOScreator", message:
-                    "Hey travler you should know that you are not connected to the internet, but thats ok. You can still explore."
-                    , preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-            case .reachableViaWiFi:
-                debugPrint("ViewController: Network reachable through WiFi")
-            case .reachableViaWWAN:
-                debugPrint("ViewController: Network reachable through Cellular Data")
-            }
-            
-        }
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            ReachabilityManager.shared.addListener(listener: self)
-        }
-        
-        override func viewDidDisappear(_ animated: Bool) {
-            super.viewDidDisappear(animated)
-            ReachabilityManager.shared.removeListener(listener: self)
-        }
-        @IBAction func createTable(){
-            
-            let createTable = self.offlinePostsTable.create(ifNotExists: true)  { (table) in
-                table.column(self.id, primaryKey: true)
-                table.column(self.imageData)
-                table.column(self.uid)
-                table.column(self.tags)
-                table.column(self.content)
-            }
-            do {
-                try self.database.run(createTable)
-                print("Successfull!")
-                
-            }catch {
-                print("Error!!!: \(error)")
-            }
-        }
-        
-        
-        
+    }
     
+    override func didReceiveMemoryWarning() {
+        print("MEMEOO")
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // insertPost()
+        return self.currPosts.count
+    }
+    
+    
+    // Indexpath is the counter of the current row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.networkStat = ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
+        print("in table view")
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
+        
+        
+        //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
+        
+        let post = self.currPosts[indexPath.row]
+       // print("posts \(post.image)")
+        let user = self.users[post.uid!] as AnyObject
+        
+        cell.titleLable.text = user["username"] as? String
         
         
         
         
+        cell.contentTextView.text = post.content
+        let imageName = post.image
+        // let imageRef = Storage.storage().reference().child("Images/\(imageName!)")
+        
+        
+        //1024*1024 is one megabyte and we want 25 megabyte
+        //  print("This is the ref: \(imageRef)")
         
         
         
+        cell.titleLable.alpha = 0
+        cell.contentTextView.alpha = 0
+        cell.postImageView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            cell.titleLable.alpha = 1
+            cell.contentTextView.alpha = 1
+            cell.postImageView.alpha = 1
+            
+            
+        })
+        
+        
+        post.getPostImage(imageView: cell.postImageView)
+        
+        return cell
+    }
+    
+    @IBAction func backFromPost(unwindSegue: UIStoryboardSegue) {
+        // Rewind from Post screen
+    }
+    @IBAction func backFromProfile(unwindSegue: UIStoryboardSegue) {
+        // Rewind from Post screen
+    }
+    
+    
+    @IBAction func logoutTapped(_ sender: Any) {
+        
+        // TODO: Check do try catch syntax
+        do {
+            try Auth.auth().signOut()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+            self.present(vc!, animated: true, completion: nil)
+            
+        } catch{
+            print("ERROR SIGNING OUT USER!")
+            
+        }
+    }
+    
+    internal override func viewDidAppear(_ animated: Bool) {
+        print("in view did appear")
+        self.loadData()
+        
+        
+        
+    }
+    @objc func applicationDidBecomeActive(notification: NSNotification) {
+        print("LLLOOOOKKK!!")
+        loadData()
+    }
+    
+    private func setUpSearchBar(){
+        
+    }
+    internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("inside search")
+        guard !searchText.isEmpty else {
+            currPosts = posts
+            postTableView.reloadData()
+            return
+        }
+        currPosts = posts.filter({post -> Bool in
+            return  post.content!.contains(searchText)
+        })
+        print(currPosts)
+        postTableView.reloadData()
+        
+    }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+    }
+    func networkStatusDidChange(status: Reachability.NetworkStatus) {
+        switch status {
+        case .notReachable:
+            debugPrint("ViewController: Network became unreachable")
+            
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "Hey travler you should know that you are not connected to the internet, but thats ok. You can still explore."
+                , preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        case .reachableViaWiFi:
+             print("this is WIFI ")
+            //SqlPostsModel.createTable()
+            //  SqlPostsModel.insertPost()
+          
+            
+            
+            
+            
+        // debugPrint("ViewController: Network reachable through WiFi")
+        case .reachableViaWWAN:
+          //  SqlPostsModel.createTable()
+            //  SqlPostsModel.insertPost()
+              debugPrint("ViewController: Network reachable through Cellular Data")
+        }
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+       
+        super.viewWillAppear(animated)
+        ReachabilityManager.shared.addListener(listener: self)
+        print("stats: \(ReachabilityManager.shared.isNetworkAvailable)")
+        print("stats: \(ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue)")
+        print("stats: \(ReachabilityManager.shared.reachabilityStatus)")
+        print("stats: \(Reachability.NetworkStatus.notReachable)")
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+       
+        super.viewDidDisappear(animated)
+        ReachabilityManager.shared.removeListener(listener: self)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

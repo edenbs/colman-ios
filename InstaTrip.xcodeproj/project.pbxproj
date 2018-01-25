@@ -27,6 +27,8 @@
 		4D6A8A8E200A421500FCA07F /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A8D200A421500FCA07F /* Extentions.swift */; };
 		4D6A8A91200A4B1400FCA07F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A90200A4B1400FCA07F /* User.swift */; };
 		4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A92200A4C0500FCA07F /* Post.swift */; };
+		4D791147201A793C00664DE3 /* OfflineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D791146201A793C00664DE3 /* OfflineHelper.swift */; };
+		4D79114B201A88AC00664DE3 /* PostOffline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79114A201A88AC00664DE3 /* PostOffline.swift */; };
 		4D7D73951FFD34D900AADDBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */; };
 		4D9AF9E21FFFCF8800C26813 /* DEFTONE.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */; };
 		4D9AF9E31FFFCF8800C26813 /* Parisish.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */; };
@@ -83,6 +85,8 @@
 		4D6A8A8D200A421500FCA07F /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		4D6A8A90200A4B1400FCA07F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D6A8A92200A4C0500FCA07F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4D791146201A793C00664DE3 /* OfflineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineHelper.swift; sourceTree = "<group>"; };
+		4D79114A201A88AC00664DE3 /* PostOffline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffline.swift; sourceTree = "<group>"; };
 		4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DEFTONE.ttf; sourceTree = "<group>"; };
 		4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Parisish.ttf; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				4D6A8A8D200A421500FCA07F /* Extentions.swift */,
+				4D791146201A793C00664DE3 /* OfflineHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				4D6A8A92200A4C0500FCA07F /* Post.swift */,
 				4D1D5E2B2018D1980009AD42 /* FirebaseModel.swift */,
 				4D1D5E2D2018E2C40009AD42 /* SqlPostsModel.swift */,
+				4D79114A201A88AC00664DE3 /* PostOffline.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 				TargetAttributes = {
 					2E43A5441FF02F5F009927BE = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = WX3BF6L6SB;
 						ProvisioningStyle = Automatic;
 					};
 					2E43A55A1FF02F61009927BE = {
@@ -555,6 +562,7 @@
 				4D1D5E2E2018E2C40009AD42 /* SqlPostsModel.swift in Sources */,
 				4DBF4F1920052BF800742084 /* MainViewController.swift in Sources */,
 				2E43A54D1FF02F60009927BE /* SecondViewController.swift in Sources */,
+				4D79114B201A88AC00664DE3 /* PostOffline.swift in Sources */,
 				2E43A5491FF02F60009927BE /* AppDelegate.swift in Sources */,
 				4D1D5E2A201251AD0009AD42 /* ReachabilityManager.swift in Sources */,
 				2E43A54B1FF02F60009927BE /* FirstViewController.swift in Sources */,
@@ -562,6 +570,7 @@
 				4D6A8A91200A4B1400FCA07F /* User.swift in Sources */,
 				2EA30E051FF1731000D1F7BA /* RegisterViewController.swift in Sources */,
 				2EB9958E1FF3FE350056A5BC /* PostViewController.swift in Sources */,
+				4D791147201A793C00664DE3 /* OfflineHelper.swift in Sources */,
 				4DBF4F1720052ADC00742084 /* PostTableViewCell.swift in Sources */,
 				4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */,
 			);
@@ -716,9 +725,10 @@
 			baseConfigurationReference = 11F03C376BC6DE91E7295202 /* Pods-InstaTrip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WX3BF6L6SB;
 				INFOPLIST_FILE = InstaTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DanaEden.InstaTrip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DanaEden.InstaTrip1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -729,9 +739,10 @@
 			baseConfigurationReference = 282B22731446655EF53D9E7D /* Pods-InstaTrip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = WX3BF6L6SB;
 				INFOPLIST_FILE = InstaTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.DanaEden.InstaTrip;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DanaEden.InstaTrip1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -14,7 +14,7 @@ class FirebaseModel
     
     var usersListUp = User()
     
-    
+   
     static func getUsers(complition: @escaping (Any?) -> Void ){
         var users = [String:AnyObject]()
         print("in get Users")
@@ -42,40 +42,64 @@ class FirebaseModel
         }
     }
     
-    static func getPosts(complition: @escaping (Any?) -> Void ){
+    
+    
+    private static func getPostsWhenOffline()-> [Post]{
+        return PostOffline().listPosts(database: SqlPostsModel.database!)
+        
+    }
+    
+    private static func getPostsWhenOnline(complition: @escaping (Any?) -> Void ){
         var posts = [Post]()
         print("in get Users")
         do {
             Database.database().reference().child("posts").observeSingleEvent(of: .value, with:{(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    var tempPost = Post()
+                    
                     
                     for post in dictionary{
+                        var tempPost = Post()
                         
                         print("this is total shit \(post.value["content"])")
                         // post.setValuesForKeys(posta)
                         //  users[user.key] = user.value
                         // print(user.value["username"])
                         tempPost.content = post.value["content"] as? String
-                        
                         tempPost.image =  post.value["image"] as? String
                         tempPost.tags =  post.value["tags"] as? String
                         tempPost.uid =  post.value["uid"] as? String
+                        tempPost.postId = post.key
+                        //                        tempPost.postId = post.key
                         posts.append(tempPost)
-                        tempPost = Post()
+                        PostOffline().insert(post: tempPost, database: SqlPostsModel.database!)
+                       // SqlPostsModel.insertPost(posta: tempPost)
+                        
+                        
+                        
                     }
-                     complition(posts)
+                    print("after insert  \( PostOffline().listPosts(database: SqlPostsModel.database!).count)")
+                    complition(posts)
                     //   post.setValuesForKeys(dictionary)
                     
                     //
                     
                 }
-               
+                
                 
             })
         } catch {
             print("error")
             complition(nil)
+        }
+    }
+    
+    
+    static func getPosts(complition: @escaping (Any?) -> Void ){
+        if (OfflineHelper.isOnline()){
+            getPostsWhenOnline(complition: complition)
+        }
+        else{
+            complition(getPostsWhenOffline())
         }
     }
     
