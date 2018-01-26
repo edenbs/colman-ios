@@ -15,6 +15,7 @@
  *user creates a new post - after it finished uploading it stays in the same screen! bad!!!!!! must go to explore.
  *new post does not appera automaticly. BAD!
  *TODO: Add observe to see if a user added a photo , and refresh the page
+ * TODO: add users also to offline table.
  */
 import UIKit
 import Firebase

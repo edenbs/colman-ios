@@ -35,18 +35,18 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     var database: Connection!
     
     
-   
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-      
+        
         
         do {
             let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
             let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
             let database = try Connection(fileUrl.path)
             self.database = database
-           // createTable()
+            // createTable()
         } catch {
             print (error)
         }
@@ -66,24 +66,16 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     @IBAction func postTapped(_ sender: Any) {
         let PhotoIdString = NSUUID().uuidString
         let uploadRef = Storage.storage().reference().child("Images/\(PhotoIdString).jpg")
-        if let uid = Auth.auth().currentUser?.uid {
+        if let uid =  Auth.auth().currentUser?.uid {
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
                     
-                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.01) {
-                        
-                        
-                        //  let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-                        //  print(strBase64)
-                        
-                        //  let dataDecoded : Data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)!
-                        // let decodedimage = UIImage(data: dataDecoded)
-                        // print("this is the decoded: \(decodedimage) this is the org \(selectedImage)")
+                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
                         
                         let metadata = StorageMetadata()
                         metadata.contentType = "image/jpeg"
-                        //TEMP
-                        //  let imageDataa = UIImageJPEGRepresentation(decodedimage!, 0.1)
+                        
+                        //TODO: take all this and move it to user class.
                         let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
                             (metadata,error) in
                             if let metadata = metadata{
@@ -91,10 +83,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                                 print(metadata.downloadURL())
                                 
                                 print("GOOOOOODD")
-                                
-                                
-                                
-                                
+
+                                // TODO: change to actual post object
                                 let postObject: Dictionary<String, Any> = [
                                     "uid" : uid,
                                     "tags" : tags,
@@ -140,15 +130,12 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
-        
-        
-        
-        
+
     }
     
     
     
-    
+    //TODO:
     // Change to UUID!!!!! LIKE THIS:
     // let a = NSUUID().uuidString
     func randomStringWithLength(length: Int) -> NSString{
@@ -231,24 +218,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
     }
     
-   /* @IBAction func createTable(){
-        let createTable = self.offlinePostsTable.create(ifNotExists: true)  { (table) in
-            table.column(self.id, primaryKey: true)
-            table.column(self.imageData)
-            table.column(self.uid)
-            table.column(self.tags)
-            table.column(self.content)
-        }
-        do {
-            try database.run(createTable)
-            print("Successfully created the table!")
-        }catch {
-            print(error)
-        }
-    }*/
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-     
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

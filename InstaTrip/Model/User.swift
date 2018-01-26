@@ -13,4 +13,12 @@ class User: NSObject {
 
 }
 
+//TODO
+
+func getUserByUID()->User{
+    return User()
+}
+
+
+
 

@@ -350,10 +350,10 @@
             </objects>
             <point key="canvasLocation" x="3920" y="-288"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="LAv-4H-kR0">
             <objects>
-                <viewController id="Wk6-Fw-GhA" sceneMemberID="viewController">
+                <viewController id="Wk6-Fw-GhA" customClass="ProfileViewController" customModule="InstaTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vuU-mm-iN5"/>
                         <viewControllerLayoutGuide type="bottom" id="OOT-73-rAa"/>
@@ -369,10 +369,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="usr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKt-1L-Wwm">
-                                <rect key="frame" x="106" y="78" width="25" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="usr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKt-1L-Wwm">
+                                <rect key="frame" x="79" y="68" width="310" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -386,6 +386,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="usernameLable" destination="VKt-1L-Wwm" id="5zy-fy-Eks"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2g-hT-Swo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vd7-ob-7bo" userLabel="Exit" sceneMemberID="exit"/>

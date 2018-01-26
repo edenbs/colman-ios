@@ -9,7 +9,10 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
- let postAddedNotification = "com.instatrip.postAddedNotification"
+
+//Added to listen to child changes of posts..
+let postAddedNotification = "com.instatrip.postAddedNotification"
+//TODO: add a insert new post to firebase..
 class Post: NSObject {
     var content: String?
     var image: String?
@@ -78,6 +81,10 @@ class Post: NSObject {
                notify()
             }
         })
+    }
+    //TODO:
+    func insertNewPost(post: Post, image: UIImage){
+        
     }
 }
 
