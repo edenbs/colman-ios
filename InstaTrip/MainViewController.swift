@@ -64,29 +64,21 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         super.viewDidLoad()
-     
-     Post.listenToChange()
-       
         
-     
-        
-//        var abcd =  Database.database().reference().child("posts").observe(DataEventType.childChanged, with: { (snapshot) in
-//
-//            print("inside the change thing")
-//            self.loadData()
-//        })
-//
+        Post.listenToChange()
         
         
-         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
-            
+      
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
+        
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         
         posts.removeAll()
         currPosts.removeAll()
         
-     
+        
         
         
         self.postTableView.reloadData()
@@ -94,61 +86,58 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         setUpSearchBar()
     }
     
-    // Adding - when loading data, each time it will write also to the db.
-    // it will try to download new photos only if we are connected to the internet,
-    func loadData(){
+    
+    
+    
+    
+    func loadData(complition: @escaping () -> Void ){
         // 0 NO net
         self.networkStat = ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
         
         
         currPosts.removeAll()
         posts.removeAll()
-        SqlPostsModel.connectDB()
-        //SqlPostsModel.delAll()
-        
-        
-        
-        //   SqlPostsModel.delAll()
-        print("in load data")
-        
-        // Run only if internet connection is available.
-        /*Database.database().reference().child("posts").observe(.childAdded, with:{(snapshot) in
-         if let dictionary = snapshot.value as? [String: AnyObject]{
-         let post = Post()
-         post.setValuesForKeys(dictionary)
-         
-         self.posts.append(post)
-         
-         }
-         self.currPosts = self.posts
-         
-         })*/
-        if (self.networkStat != 0)
-        {
-            print("inside the net")
-            FirebaseModel.getPosts{ (response) in
+        DispatchQueue.global(qos: .background).async {
+            SqlPostsModel.connectDB()
+            //SqlPostsModel.delAll()
+            
+            
+            
+            //   SqlPostsModel.delAll()
+            print("in load data")
+            
+            // Run only if internet connection is available.
+            
+            if (self.networkStat != 0)
+            {
+                print("inside the net")
+                FirebaseModel.getPosts{ (response) in
+                    
+                    guard  let postsA = response as? [Post] else {return}
+                    //  print("This is the users list and response\(usersList) \(response)")
+                    self.posts = postsA
+                    self.currPosts = self.posts
+                    
+                }
+                FirebaseModel.getUsers { (response) in
+                    
+                    guard  let usersA = response  as? [String : AnyObject] else {return}
+                    //  print("This is the users list and response\(usersList) \(response)")
+                    self.users = usersA
+                    self.postTableView.reloadData()
+                }
                 
-                guard  let postsA = response as? [Post] else {return}
-                //  print("This is the users list and response\(usersList) \(response)")
-                self.posts = postsA
+            }
+                
+                
+            else {
+                print("inside the  NOT net")
+                self.posts = PostOffline().listPosts(database: SqlPostsModel.database!)
+                //SqlPostsModel.listPosts()
                 self.currPosts = self.posts
                 
             }
-            FirebaseModel.getUsers { (response) in
-                
-                guard  let usersA = response  as? [String : AnyObject] else {return}
-                //  print("This is the users list and response\(usersList) \(response)")
-                self.users = usersA
-                self.postTableView.reloadData()
-            }
-            
-        }
-        else {
-            print("inside the  NOT net")
-            self.posts = PostOffline().listPosts(database: SqlPostsModel.database!)
-                //SqlPostsModel.listPosts()
-            self.currPosts = self.posts
-            
+            complition()
         }
         
         
@@ -187,7 +176,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
         
         let post = self.currPosts[indexPath.row]
-       // print("posts \(post.image)")
+        // print("posts \(post.image)")
         let user = self.users[post.uid!] as AnyObject
         
         cell.titleLable.text = user["username"] as? String
@@ -205,9 +194,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         
-       /* cell.titleLable.alpha = 0
-        cell.contentTextView.alpha = 0
-        cell.postImageView.alpha = 0*/
+        /* cell.titleLable.alpha = 0
+         cell.contentTextView.alpha = 0
+         cell.postImageView.alpha = 0*/
         
         UIView.animate(withDuration: 0.4, animations: {
             cell.titleLable.alpha = 1
@@ -247,14 +236,14 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     internal override func viewDidAppear(_ animated: Bool) {
         print("in view did appear")
-        self.loadData()
+        self.loadData(complition: {})
         
         
         
     }
     @objc func applicationDidBecomeActive(notification: NSNotification) {
         print("LLLOOOOKKK!!")
-        loadData()
+        loadData(complition: {})
     }
     
     private func setUpSearchBar(){
@@ -280,7 +269,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     func networkStatusDidChange(status: Reachability.NetworkStatus) {
         switch status {
         case .notReachable:
-            loadData()
+            loadData(complition: {})
             debugPrint("ViewController: Network became unreachable")
             
             let alertController = UIAlertController(title: "iOScreator", message:
@@ -289,26 +278,26 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
         case .reachableViaWiFi:
-             print("this is WIFI ")
-            loadData()
+            print("this is WIFI ")
+            loadData(complition: {})
             //SqlPostsModel.createTable()
             //  SqlPostsModel.insertPost()
-          
+            
             
             
             
             
         // debugPrint("ViewController: Network reachable through WiFi")
         case .reachableViaWWAN:
-          //  SqlPostsModel.createTable()
+            //  SqlPostsModel.createTable()
             //  SqlPostsModel.insertPost()
-            loadData()
-              debugPrint("ViewController: Network reachable through Cellular Data")
+            loadData(complition: {})
+            debugPrint("ViewController: Network reachable through Cellular Data")
         }
         
     }
     override func viewWillAppear(_ animated: Bool) {
-       
+        
         super.viewWillAppear(animated)
         ReachabilityManager.shared.addListener(listener: self)
         print("stats: \(ReachabilityManager.shared.isNetworkAvailable)")
@@ -319,12 +308,13 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-       
+        
         super.viewDidDisappear(animated)
         ReachabilityManager.shared.removeListener(listener: self)
     }
     func actOnChildAdded() {
-        print("hey 1994")
+        loadData(complition: {})
+        
     }
     
     

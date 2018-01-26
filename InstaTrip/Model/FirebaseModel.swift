@@ -78,7 +78,7 @@ class FirebaseModel
                         
                         
                     }
-                    print("after insert  \( PostOffline().listPosts(database: SqlPostsModel.database!).count)")
+                   // print("after insert  \( PostOffline().listPosts(database: SqlPostsModel.database!).count)")
                     complition(posts)
                     //   post.setValuesForKeys(dictionary)
                     
