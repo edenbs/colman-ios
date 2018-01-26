@@ -15,6 +15,7 @@ class FirebaseModel
     var usersListUp = User()
     
    
+    
     static func getUsers(complition: @escaping (Any?) -> Void ){
         var users = [String:AnyObject]()
         print("in get Users")

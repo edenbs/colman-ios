@@ -59,6 +59,7 @@ class FirstViewController: UIViewController {
             else {
                 // success
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
+                 self.tabBarController?.selectedIndex = 0
                 self.present(vc!, animated: true, completion: nil)
             }
         }

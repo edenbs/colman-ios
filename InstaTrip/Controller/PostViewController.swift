@@ -19,18 +19,8 @@ import SystemConfiguration
 import SQLite
 import ReachabilitySwift
 
-class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate, NetworkStatusListener {
-    func networkStatusDidChange(status: Reachability.NetworkStatus) {
-        switch status {
-        case .notReachable:
-            debugPrint("ViewController: Network became unreachable")
-        case .reachableViaWiFi:
-            debugPrint("ViewController: Network reachable through WiFi")
-        case .reachableViaWWAN:
-            debugPrint("ViewController: Network reachable through Cellular Data")
-        }
-
-    }
+class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate {
+    
     
     @IBOutlet weak var contentTextField: UITextView!
     @IBOutlet weak var tagsTextField: UITextField!
@@ -45,15 +35,11 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     var database: Connection!
     
     
-    let uid = Expression<String>("uid")
-    let tags = Expression<String>("tags")
-    let content = Expression<String>("content")
-    let imageData = Expression<Data>("imageData")
-    let id = Expression<Int>("id")
-    
+   
     override func viewDidLoad() {
         
         super.viewDidLoad()
+      
         
         do {
             let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
@@ -84,7 +70,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
                     
-                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
+                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.01) {
                         
                         
                         //  let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
@@ -262,12 +248,12 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     }*/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ReachabilityManager.shared.addListener(listener: self)
+     
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        ReachabilityManager.shared.removeListener(listener: self)
+        
     }
     
     

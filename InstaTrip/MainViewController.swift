@@ -28,6 +28,7 @@ import ReachabilitySwift
 class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate  , NetworkStatusListener {
     
     
+    
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -63,35 +64,29 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         super.viewDidLoad()
+     
+     Post.listenToChange()
+       
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidBecomeActive(notification:)),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil)
+     
+        
+//        var abcd =  Database.database().reference().child("posts").observe(DataEventType.childChanged, with: { (snapshot) in
+//
+//            print("inside the change thing")
+//            self.loadData()
+//        })
+//
         
         
-        /*  do {
-         let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
-         let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
-         let database = try Connection(fileUrl.path)
-         self.database = database
-         // createTable()
-         } catch {
-         print (error)
-         }
-         //  createTable()
-         */
-        
+         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
+            
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         
         posts.removeAll()
         currPosts.removeAll()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-            //  self.loadData()
-        })
+     
         
         
         self.postTableView.reloadData()
@@ -210,9 +205,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         
-        cell.titleLable.alpha = 0
+       /* cell.titleLable.alpha = 0
         cell.contentTextView.alpha = 0
-        cell.postImageView.alpha = 0
+        cell.postImageView.alpha = 0*/
         
         UIView.animate(withDuration: 0.4, animations: {
             cell.titleLable.alpha = 1
@@ -285,6 +280,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     func networkStatusDidChange(status: Reachability.NetworkStatus) {
         switch status {
         case .notReachable:
+            loadData()
             debugPrint("ViewController: Network became unreachable")
             
             let alertController = UIAlertController(title: "iOScreator", message:
@@ -294,6 +290,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             self.present(alertController, animated: true, completion: nil)
         case .reachableViaWiFi:
              print("this is WIFI ")
+            loadData()
             //SqlPostsModel.createTable()
             //  SqlPostsModel.insertPost()
           
@@ -305,6 +302,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         case .reachableViaWWAN:
           //  SqlPostsModel.createTable()
             //  SqlPostsModel.insertPost()
+            loadData()
               debugPrint("ViewController: Network reachable through Cellular Data")
         }
         
@@ -325,7 +323,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         super.viewDidDisappear(animated)
         ReachabilityManager.shared.removeListener(listener: self)
     }
-    
+    func actOnChildAdded() {
+        print("hey 1994")
+    }
     
     
     

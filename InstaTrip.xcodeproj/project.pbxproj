@@ -24,6 +24,7 @@
 		4D1D5E2A201251AD0009AD42 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D5E29201251AC0009AD42 /* ReachabilityManager.swift */; };
 		4D1D5E2C2018D1980009AD42 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D5E2B2018D1980009AD42 /* FirebaseModel.swift */; };
 		4D1D5E2E2018E2C40009AD42 /* SqlPostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D5E2D2018E2C40009AD42 /* SqlPostsModel.swift */; };
+		4D283F42201BC08C00ACC11E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D283F41201BC08C00ACC11E /* ProfileViewController.swift */; };
 		4D6A8A8E200A421500FCA07F /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A8D200A421500FCA07F /* Extentions.swift */; };
 		4D6A8A91200A4B1400FCA07F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A90200A4B1400FCA07F /* User.swift */; };
 		4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A92200A4C0500FCA07F /* Post.swift */; };
@@ -82,6 +83,7 @@
 		4D1D5E29201251AC0009AD42 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReachabilityManager.swift; path = "../../../../../../../Downloads/NetworkStatusMonitorPart2-master/NetworkStatusMonitor/Networking/Core/ReachabilityManager.swift"; sourceTree = "<group>"; };
 		4D1D5E2B2018D1980009AD42 /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		4D1D5E2D2018E2C40009AD42 /* SqlPostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlPostsModel.swift; sourceTree = "<group>"; };
+		4D283F41201BC08C00ACC11E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4D6A8A8D200A421500FCA07F /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		4D6A8A90200A4B1400FCA07F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D6A8A92200A4C0500FCA07F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				2EA30E041FF1731000D1F7BA /* RegisterViewController.swift */,
 				2E43A54A1FF02F60009927BE /* FirstViewController.swift */,
 				2E43A54C1FF02F60009927BE /* SecondViewController.swift */,
+				4D283F41201BC08C00ACC11E /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				2E43A54D1FF02F60009927BE /* SecondViewController.swift in Sources */,
 				4D79114B201A88AC00664DE3 /* PostOffline.swift in Sources */,
 				2E43A5491FF02F60009927BE /* AppDelegate.swift in Sources */,
+				4D283F42201BC08C00ACC11E /* ProfileViewController.swift in Sources */,
 				4D1D5E2A201251AD0009AD42 /* ReachabilityManager.swift in Sources */,
 				2E43A54B1FF02F60009927BE /* FirstViewController.swift in Sources */,
 				4D6A8A8E200A421500FCA07F /* Extentions.swift in Sources */,

@@ -8,14 +8,15 @@
 
 import UIKit
 import FirebaseStorage
-
+import FirebaseDatabase
+ let postAddedNotification = "com.instatrip.postAddedNotification"
 class Post: NSObject {
     var content: String?
     var image: String?
     var tags: String?
     var uid: String?
     var postId: String?
-    
+   
    private func getPostImageOnline(imageView: UIImageView){
     imageView.image = nil
     //check if iamge is in cache
@@ -64,6 +65,19 @@ class Post: NSObject {
         else{
             getPostImageOffline(imageView: imageView)
         }
+    }
+    static func notify() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: postAddedNotification), object: self)
+    }
+    
+    public static func listenToChange(){
+        var refHandle =  Database.database().reference().child("posts").observe(DataEventType.value, with: { (snapshot) in
+            //let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print("inside the thing \(snapshot)")
+            DispatchQueue.global(qos: .background).async {
+               notify()
+            }
+        })
     }
 }
 
