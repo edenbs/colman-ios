@@ -70,13 +70,23 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
                     
-                    if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
+                    let post = Post()
+                    post.uid = uid
+                    post.tags = tags
+                    post.content = content
+                    post.image = PhotoIdString+".jpg"
+                    
+                    post.insertNewPost(image: selectedImage!, complition: {
+                        ProgressHUD.showSuccess("Uploaded successfully", interaction: true)
+                        self.tabBarController?.selectedIndex = 0
+                    })
+                  //  if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
                         
-                        let metadata = StorageMetadata()
-                        metadata.contentType = "image/jpeg"
+                     //   let metadata = StorageMetadata()
+                    //    metadata.contentType = "image/jpeg"
                         
                         //TODO: take all this and move it to user class.
-                        let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
+                    /*    let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
                             (metadata,error) in
                             if let metadata = metadata{
                                 // A link to the photo
@@ -109,11 +119,11 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                             print(percentage)
                             ProgressHUD.show("Uploading", interaction: false)
                             
-                        })
-                    }
-                    else {
-                        print("error")
-                    }
+                        })*/
+                //    }
+                  //  else {
+                    //    print("error")
+                    //}
                 }
             }
         }
@@ -218,6 +228,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
     }
     
+   
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

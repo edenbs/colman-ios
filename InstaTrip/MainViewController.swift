@@ -30,6 +30,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     
     
+    
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -65,6 +66,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         super.viewDidLoad()
+        
+        postTableView.isUserInteractionEnabled = true
+        
         
         Post.listenToChange()
         
@@ -112,7 +116,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             if (self.networkStat != 0)
             {
                 print("inside the net")
-                FirebaseModel.getPosts{ (response) in
+                Post.getPosts{ (response) in
                     
                     guard  let postsA = response as? [Post] else {return}
                     //  print("This is the users list and response\(usersList) \(response)")
@@ -321,7 +325,15 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
     }
     
-    
+    internal override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("TOUCH")
+        super.touchesBegan(touches, with: event)
+       
+    }
+    @IBAction func tapped(_ sender: Any) {
+        print("123456789")
+         self.searchBar.endEditing(true)
+    }
     
     
     
