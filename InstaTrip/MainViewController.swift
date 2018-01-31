@@ -251,6 +251,8 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     private func setUpSearchBar(){
         
     }
+    
+    //TODO: add search by tags
     internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("inside search")
         guard !searchText.isEmpty else {

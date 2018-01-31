@@ -12,20 +12,15 @@ import FirebaseAuth
 class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     
+    @IBOutlet weak var nothingLable: UITextView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var usernameLable: UILabel!
+   // @IBOutlet weak var usernameLable: UILabel!
     var userPosts = [Post]()
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        FirebaseModel.getPostByUserID(uid: "56NrGlEqKKPTIa0Gklr6CVF2bT72", complition: {(response) in
-            let posts = response as? [Post]
-            self.userPosts = posts!
-            print("in view did load")
-            DispatchQueue.main.async(execute: self.collectionView.reloadData)
-        })
         if Auth.auth().currentUser == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
@@ -33,12 +28,32 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
             
         }
         else{
-            self.usernameLable.text = Auth.auth().currentUser?.email
+           // self.usernameLable.text = Auth.auth().currentUser?.email
+            nothingLable.isHidden = true
             
         }
+       
+       
+       
         
     }
-    
+    func loadData(){
+        FirebaseModel.getPostByUserID(uid: (Auth.auth().currentUser?.uid)! , complition: {(response) in
+            let posts = response as? [Post]
+            self.userPosts = posts!
+            print("in view did load")
+           // DispatchQueue.main.async(execute: self.collectionView.reloadData)
+            self.collectionView.reloadData()
+            if (self.userPosts.count == 0) {
+                print("inside the if")
+                self.nothingLable.isHidden = false
+            }
+            else {
+                self.nothingLable.isHidden = true
+            }
+        })
+       
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("count")
         print(userPosts.count)
@@ -52,6 +67,12 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         post.getPostImage(imageView: cell.postImage)
         cell.postContent.text = post.content
         return cell
+    }
+    internal override func viewDidAppear(_ animated: Bool) {
+        print("in view did appear")
+        self.loadData()
+        
+        
     }
     
     

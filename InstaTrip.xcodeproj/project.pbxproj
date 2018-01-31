@@ -30,6 +30,8 @@
 		4D6A8A91200A4B1400FCA07F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A90200A4B1400FCA07F /* User.swift */; };
 		4D6A8A93200A4C0500FCA07F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A8A92200A4C0500FCA07F /* Post.swift */; };
 		4D6AFB5120220AF700AE5AB2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6AFB5020220AF700AE5AB2 /* CollectionViewCell.swift */; };
+		4D6AFB53202224DC00AE5AB2 /* RemachineScript_PERSONAL_USE_ONLY.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6AFB522022242A00AE5AB2 /* RemachineScript_PERSONAL_USE_ONLY.ttf */; };
+		4D6AFB5520222D6D00AE5AB2 /* PoiretOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D6AFB5420222D6000AE5AB2 /* PoiretOne-Regular.ttf */; };
 		4D791147201A793C00664DE3 /* OfflineHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D791146201A793C00664DE3 /* OfflineHelper.swift */; };
 		4D79114B201A88AC00664DE3 /* PostOffline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79114A201A88AC00664DE3 /* PostOffline.swift */; };
 		4D7D73951FFD34D900AADDBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */; };
@@ -91,6 +93,8 @@
 		4D6A8A90200A4B1400FCA07F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4D6A8A92200A4C0500FCA07F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4D6AFB5020220AF700AE5AB2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		4D6AFB522022242A00AE5AB2 /* RemachineScript_PERSONAL_USE_ONLY.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RemachineScript_PERSONAL_USE_ONLY.ttf; sourceTree = "<group>"; };
+		4D6AFB5420222D6000AE5AB2 /* PoiretOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PoiretOne-Regular.ttf"; sourceTree = "<group>"; };
 		4D791146201A793C00664DE3 /* OfflineHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineHelper.swift; sourceTree = "<group>"; };
 		4D79114A201A88AC00664DE3 /* PostOffline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOffline.swift; sourceTree = "<group>"; };
 		4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -158,12 +162,14 @@
 		2E43A5471FF02F60009927BE /* InstaTrip */ = {
 			isa = PBXGroup;
 			children = (
+				4D6AFB5420222D6000AE5AB2 /* PoiretOne-Regular.ttf */,
 				4D1D5E29201251AC0009AD42 /* ReachabilityManager.swift */,
 				4D6A8A8F200A4B0000FCA07F /* Model */,
 				4D6A8A8A200A41CA00FCA07F /* Helpers */,
 				4D35C1E320012877005E2128 /* Controller */,
 				4D9AF9E01FFFCF7C00C26813 /* DEFTONE.ttf */,
 				4D9AF9E11FFFCF7F00C26813 /* Parisish.ttf */,
+				4D6AFB522022242A00AE5AB2 /* RemachineScript_PERSONAL_USE_ONLY.ttf */,
 				4D7D73941FFD34D900AADDBC /* GoogleService-Info.plist */,
 				2E43A5481FF02F60009927BE /* AppDelegate.swift */,
 				4D1D5E1F200FC5990009AD42 /* icons8-login_as_user_filled.png */,
@@ -372,6 +378,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6AFB5520222D6D00AE5AB2 /* PoiretOne-Regular.ttf in Resources */,
+				4D6AFB53202224DC00AE5AB2 /* RemachineScript_PERSONAL_USE_ONLY.ttf in Resources */,
 				4D9AF9E21FFFCF8800C26813 /* DEFTONE.ttf in Resources */,
 				4D1D5E24200FE01B0009AD42 /* icons8-quill_with_ink_filled.png in Resources */,
 				4D1D5E22200FDFD10009AD42 /* icons8-binoculars_filled.png in Resources */,
