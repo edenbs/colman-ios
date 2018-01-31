@@ -130,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1067" y="89"/>
+            <point key="canvasLocation" x="-646" y="-1621"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="uZU-CF-rI2">
@@ -194,7 +194,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSR-Hh-KEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="VIv-20-fVD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1794" y="87"/>
+            <point key="canvasLocation" x="80" y="-1623"/>
         </scene>
         <!--InstaTrip-->
         <scene sceneID="EYu-uu-96s">
@@ -215,15 +215,6 @@
                                 <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
-                                <rect key="frame" x="243" y="636" width="157" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="53"/>
-                                <state key="normal" title="Post!"/>
-                                <connections>
-                                    <action selector="postTapped:" destination="fyn-uQ-qUj" eventType="touchUpInside" id="aey-e2-ffD"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
                                 <rect key="frame" x="1" y="86" width="413" height="274"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -249,6 +240,15 @@
                                 <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="32"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="location"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
+                                <rect key="frame" x="243" y="595" width="157" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="53"/>
+                                <state key="normal" title="Post!"/>
+                                <connections>
+                                    <action selector="postTapped:" destination="fyn-uQ-qUj" eventType="touchUpInside" id="aey-e2-ffD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -270,7 +270,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVA-mD-brg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="r5K-rk-iZW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5991" y="-538"/>
+            <point key="canvasLocation" x="6417" y="-1021"/>
         </scene>
         <!--INSTA!-->
         <scene sceneID="PqP-2d-f7P">
@@ -348,11 +348,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mJ-fE-PEH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3920" y="-288"/>
+            <point key="canvasLocation" x="2099" y="-976"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="LAv-4H-kR0">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E2g-hT-Swo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vd7-ob-7bo" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController id="Wk6-Fw-GhA" customClass="ProfileViewController" customModule="InstaTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vuU-mm-iN5"/>
@@ -362,17 +364,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmU-sz-a3A">
-                                <rect key="frame" x="8" y="72" width="214" height="33"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-aw-gkm">
+                                <rect key="frame" x="8" y="192" width="406" height="472"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TRx-v8-UnV">
+                                    <size key="itemSize" width="193" height="248"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewCell" id="eif-uo-fTE" customClass="CollectionViewCell" customModule="InstaTrip" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="248"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="193" height="248"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ORx-NR-rpu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="193" height="160"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="999" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STQ-mn-5Z6">
+                                                    <rect key="frame" x="20" y="149" width="130" height="99"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <connections>
+                                            <outlet property="postContent" destination="STQ-mn-5Z6" id="kga-aV-RyM"/>
+                                            <outlet property="postImage" destination="ORx-NR-rpu" id="aVh-FS-xbH"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-4y-YCr">
+                                <rect key="frame" x="104" y="105" width="247" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Take a look at your
+awsome adventures</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="usr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKt-1L-Wwm">
-                                <rect key="frame" x="79" y="68" width="310" height="71"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="usr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKt-1L-Wwm">
+                                <rect key="frame" x="20" y="82" width="287" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -387,13 +429,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="vXO-aw-gkm" id="qx0-bV-XiP"/>
                         <outlet property="usernameLable" destination="VKt-1L-Wwm" id="5zy-fy-Eks"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E2g-hT-Swo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="vd7-ob-7bo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5989.8550724637689" y="152.44565217391306"/>
+            <point key="canvasLocation" x="4147.826086956522" y="-394.56521739130437"/>
         </scene>
         <!--Item-->
         <scene sceneID="RRO-I8-jPb">
@@ -413,7 +454,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpW-YW-5CV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5009" y="-538"/>
+            <point key="canvasLocation" x="6417" y="-1810"/>
         </scene>
         <!--Item-->
         <scene sceneID="07p-T9-hb0">
@@ -437,7 +478,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gn8-IY-b5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3013.04347826087" y="-287.77173913043481"/>
+            <point key="canvasLocation" x="2099" y="-1793"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5jR-G8-RbU">
@@ -457,16 +498,17 @@
                     <connections>
                         <segue destination="Fe7-QQ-Stg" kind="relationship" relationship="viewControllers" id="0aG-SC-oj0"/>
                         <segue destination="QBf-Yk-jyM" kind="relationship" relationship="viewControllers" id="Ic9-rD-An6"/>
-                        <segue destination="IM2-dV-ygO" kind="relationship" relationship="viewControllers" id="hQe-6U-oWh"/>
+                        <segue destination="IM2-dV-ygO" kind="relationship" relationship="viewControllers" id="AIF-og-pc5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sx5-X7-9Hl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3623" y="-1280"/>
+            <point key="canvasLocation" x="4149" y="-2747"/>
         </scene>
         <!--Item-->
         <scene sceneID="vfa-4t-JIF">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UJX-w6-PYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IM2-dV-ygO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="icons8-login_as_user_filled.png" id="5f8-4a-VPB"/>
                     <toolbarItems/>
@@ -479,9 +521,8 @@
                         <segue destination="Wk6-Fw-GhA" kind="relationship" relationship="rootViewController" id="sbQ-Hp-gDo"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UJX-w6-PYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5009" y="197"/>
+            <point key="canvasLocation" x="4148" y="-1415"/>
         </scene>
     </scenes>
     <resources>

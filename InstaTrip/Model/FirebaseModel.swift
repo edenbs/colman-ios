@@ -104,6 +104,49 @@ class FirebaseModel
         }
     }
     
+    static func getPostByUserID(uid: String, complition: @escaping (Any?) -> Void ){
+        var posts = [Post]()
+        do {
+            Database.database().reference().child("posts").queryOrdered(byChild: "uid").queryEqual(toValue: uid).observeSingleEvent(of: .value, with:{(snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject]{
+                    
+                    print(dictionary)
+                    for post in dictionary{
+                        var tempPost = Post()
+                        
+                        print("this is total shit \(post.value["content"])")
+                        // post.setValuesForKeys(posta)
+                        //  users[user.key] = user.value
+                        // print(user.value["username"])
+                        tempPost.content = post.value["content"] as? String
+                        tempPost.image =  post.value["image"] as? String
+                        tempPost.tags =  post.value["tags"] as? String
+                        tempPost.uid =  post.value["uid"] as? String
+                        tempPost.postId = post.key
+                        //                        tempPost.postId = post.key
+                        posts.append(tempPost)
+                        PostOffline().insert(post: tempPost, database: SqlPostsModel.database!)
+                        // SqlPostsModel.insertPost(posta: tempPost)
+                        
+                        
+                        
+                    }
+                    
+                    complition(posts)
+           
+                    
+                }
+                
+                
+            })
+        } catch {
+            print("error")
+            complition(nil)
+        }
+       
+        
+    }
+    
     
     
 }
