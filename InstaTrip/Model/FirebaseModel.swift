@@ -29,7 +29,7 @@ class FirebaseModel
                     for user in usersDictionary{
                         
                         users[user.key] = user.value
-                        print(user.value["username"])
+                       
                         
                         
                     }
@@ -42,6 +42,7 @@ class FirebaseModel
             complition(nil)
         }
     }
+    
     
     
     

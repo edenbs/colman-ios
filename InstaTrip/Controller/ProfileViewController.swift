@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseAuth
 class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
-    
-  //  @IBOutlet weak var deleteButton: UIButton!
+    //TODO: add a alert that you are not connected to the internet. like posts page.
+    //  @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var nothingLable: UITextView!
     @IBOutlet weak var collectionView: UICollectionView!
-   // @IBOutlet weak var usernameLable: UILabel!
+    // @IBOutlet weak var usernameLable: UILabel!
     var userPosts = [Post]()
     override func viewDidLoad() {
         
@@ -23,38 +22,38 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        //TODO do not use fire base here move to user
         if Auth.auth().currentUser == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
             self.present(vc!, animated: false, completion:nil )
             
         }
-        else{
-           // self.usernameLable.text = Auth.auth().currentUser?.email
-            nothingLable.isHidden = true
-            
-        }
-       
-       
-       
+
+        
+        
+        
         
     }
     func loadData(){
-        Post.getPostByUserID(uid: (Auth.auth().currentUser?.uid)! , complition: {(response) in
-            let posts = response as? [Post]
-            self.userPosts = posts!
-            print("in view did load")
-            if (self.userPosts.count == 0) {
-                print("inside the if")
-                self.nothingLable.isHidden = false
+        if(OfflineHelper.isOnline() == true)
+        {
+            Post.getPostByUserID(uid: (Auth.auth().currentUser?.uid)! , complition: {(response) in
+                let posts = response as? [Post]
+                self.userPosts = posts!
+                print("in view did load")
+                if (self.userPosts.count == 0) {
+                    print("inside the if")
+                    self.nothingLable.isHidden = false
+                }
+                else {
+                    self.nothingLable.isHidden = true
+                }
+                
+                self.collectionView.reloadData()
+                
             }
-            else {
-                self.nothingLable.isHidden = true
-            }
-           // DispatchQueue.main.async(execute: self.collectionView.reloadData)
-            self.collectionView.reloadData()
-            
-        })
+            )}
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("count")
@@ -66,66 +65,55 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath)
             as! CollectionViewCell
         let post = userPosts[indexPath.row]
-        post.getPostImage(imageView: cell.postImage)
+        if(OfflineHelper.isOnline() == true)
+        {
+            post.getPostImage(imageView: cell.postImage)
+            
+        }
         cell.postContent.text = post.content
         cell.postId = post.postId!
         cell.imageName = post.image!
+        cell.deleteButt.layer.setValue(indexPath, forKey: "index")
+        if (self.userPosts.count == 0) {
+            print("inside the if")
+            self.nothingLable.isHidden = false
+        }
+        else {
+            self.nothingLable.isHidden = true
+        }
+        
         return cell
     }
     internal override func viewDidAppear(_ animated: Bool) {
         print("in view did appear")
         self.loadData()
-   
         
     }
+
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)  {
-        print("selected")
-        //deleteButton.isEnabled = true
-//        deleteButton.isHidden = false
-       
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"collectionViewCell", for: indexPath) as! CollectionViewCell
-        //cell.deleteTap()
+    
+    @IBAction func tap(_ sender: Any) {
+        let refreshAlert = UIAlertController(title: "Delete this?!", message: "post will be lost.", preferredStyle: UIAlertControllerStyle.alert)
         
-       //self.collectionView.reloadData()
-        cell.postContent.text = ""
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            let sendButton = sender as! UIButton
+            let indexPath = sendButton.layer.value(forKey: "index") as! IndexPath
+            let cell = self.collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+            Post.deletePost(postId: cell.postId, imageName: cell.imageName, complition: {})
+            self.userPosts.remove(at: indexPath.row)
+            self.collectionView.reloadData()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            print("Handle Cancel Logic here")
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+        
+        
         
         
     }
-   /* func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
-        cell.backgroundColor = UIColor.red
-        //let desertRef = storageRef.child("desert.jpg")
-     
-        if ( cell.deleteButt.isHidden) {
-            cell.deleteButt.isHidden = false
-            cell.deleteButt.isEnabled = true
-            Database.database().reference().child("posts").child(cell.postId).removeValue(completionBlock: {(error, ref) in
-                print("in 123456789")
-                print(ref)
-            })
-  
-            
-            
-            Storage.storage().reference().child("Images/\(cell.imageName)").delete { error in
-                if let error = error {
-                    // Uh-oh, an error occurred!
-                } else {
-                    // File deleted successfully
-                }
-            }
-        }
-        else{
-            cell.deleteButt.isHidden = true
-            cell.deleteButt.isEnabled = false
-            
-        }
-        
-        
-        
-    }*/
-    
-    
     
     
 }

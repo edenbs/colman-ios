@@ -10,10 +10,10 @@ import UIKit
 import FirebaseStorage
 import FirebaseDatabase
 import ProgressHUD
-
+let imageCache = NSCache<AnyObject, AnyObject>()
 //Added to listen to child changes of posts..
 let postAddedNotification = "com.instatrip.postAddedNotification"
-//TODO: add a insert new post to firebase..
+
 class Post: NSObject {
     var content: String?
     var image: String?
@@ -152,7 +152,6 @@ class Post: NSObject {
                         tempPost.postId = post.key
                         //                        tempPost.postId = post.key
                         posts.append(tempPost)
-                        PostOffline().insert(post: tempPost, database: SqlPostsModel.database!)
                         
                     }
                     
@@ -212,6 +211,27 @@ class Post: NSObject {
         else{
             complition(getPostsWhenOffline())
         }
+    }
+    
+    static func deletePost(postId: String,imageName: String,complition: @escaping () -> Void ){
+        Database.database().reference().child("posts").child(postId).removeValue(completionBlock: {(error, ref) in
+            print("in 123456789")
+            print(ref)
+          complition()
+        })
+        
+        
+        
+        Storage.storage().reference().child("Images/\(imageName)").delete { error in
+            if let error = error {
+                print("storage \(error)")
+                // Uh-oh, an error occurred!
+            } else {
+                // File deleted successfully
+            }
+        }
+        
+        PostOffline().deletePost(database: SqlPostsModel.database!, postId: postId)
     }
     
     

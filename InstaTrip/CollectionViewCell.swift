@@ -26,11 +26,5 @@ class CollectionViewCell:  UICollectionViewCell {
         postId = Id
         imageName = imName
     }
- func deleteTap() {
-        print("hello")
-        self.deleteButt.isEnabled = true
-        self.deleteButt.isHidden = true
-    print(deleteButt.isHidden)
-    }
-    
+   
 }

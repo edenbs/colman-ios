@@ -41,7 +41,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         
         
-        do {
+       /* do {
             let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
             let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
             let database = try Connection(fileUrl.path)
@@ -49,7 +49,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             // createTable()
         } catch {
             print (error)
-        }
+        }*/
         
         self.contentTextField.delegate = self
         // Do any additional setup after loading the view.
@@ -80,50 +80,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                         ProgressHUD.showSuccess("Uploaded successfully", interaction: true)
                         self.tabBarController?.selectedIndex = 0
                     })
-                  //  if let imageData = UIImageJPEGRepresentation(selectedImage!, 0.1) {
-                        
-                     //   let metadata = StorageMetadata()
-                    //    metadata.contentType = "image/jpeg"
-                        
-                        //TODO: take all this and move it to user class.
-                    /*    let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
-                            (metadata,error) in
-                            if let metadata = metadata{
-                                // A link to the photo
-                                print(metadata.downloadURL())
-                                
-                                print("GOOOOOODD")
-
-                                // TODO: change to actual post object
-                                let postObject: Dictionary<String, Any> = [
-                                    "uid" : uid,
-                                    "tags" : tags,
-                                    "content" : content,
-                                    "image" : PhotoIdString+".jpg",
-                                    ]
-                                Database.database().reference().child("posts").childByAutoId().setValue(postObject)
-                                ProgressHUD.showSuccess("Uploaded successfully", interaction: true)
-                                self.tabBarController?.selectedIndex = 0
-                            }
-                            else{
-                                print ("BYE")
-                                ProgressHUD.showError()
-                            }
-                        })
-                        uploadTask.observe(.progress, handler: { (snapshot) in
-                            guard let progress = snapshot.progress else {
-                                return
-                            }
-                            
-                            let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
-                            print(percentage)
-                            ProgressHUD.show("Uploading", interaction: false)
-                            
-                        })*/
-                //    }
-                  //  else {
-                    //    print("error")
-                    //}
+                 
                 }
             }
         }
@@ -148,7 +105,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     //TODO:
     // Change to UUID!!!!! LIKE THIS:
     // let a = NSUUID().uuidString
-    func randomStringWithLength(length: Int) -> NSString{
+   /* func randomStringWithLength(length: Int) -> NSString{
         // Casting to NSstring
         let chars : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString : NSMutableString = NSMutableString(capacity: length)
@@ -162,7 +119,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         }
         
         return randomString
-    }
+    }*/
     
     // The image picker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -171,10 +128,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             self.previewImageView.image = pickedImage
             
             // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-            self.selectImageButton.isEnabled = false
+          // self.selectImageButton.isEnabled = false
             
             // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-            self.selectImageButton.isHidden = true
+           // self.selectImageButton.isHidden = true
             
             self.tagsTextField.isEnabled = true
             
@@ -192,33 +149,15 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     }
     internal func textViewDidBeginEditing(_ textView: UITextView) {
         print("THIS IS SHIT!!!!!!!!!")
-        contentTextField.text = ""
+        if( contentTextField.text == "Describe Your Scene...")
+      {  contentTextField.text = ""}
     }
     
-    func isInternetAvailable() -> Bool
-    {
-        var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
-        zeroAddress.sin_family = sa_family_t(AF_INET)
-        
-        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
-                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
-            }
-        }
-        
-        var flags = SCNetworkReachabilityFlags()
-        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
-            return false
-        }
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        return (isReachable && !needsConnection)
-    }
+   
     
     
     internal override func viewDidAppear(_ animated: Bool) {
-        if (isInternetAvailable() == false) {
+        if (OfflineHelper.isOnline() == false) {
             let alertController = UIAlertController(title: "iOScreator", message:
                 "YOU ARE NOT CONNECTED TO THE INTERNET!!!", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
@@ -237,6 +176,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.previewImageView.image = UIImage()
+        self.tagsTextField.text = ""
+        if(contentTextField.text != "Describe Your Scene...")
+       { self.contentTextField.text = ""}
         
     }
     

@@ -18,9 +18,6 @@
  * TODO: add users also to offline table.
  */
 import UIKit
-import Firebase
-import FirebaseDatabase
-import FirebaseStorage
 import FirebaseAuth
 import SQLite
 import ReachabilitySwift
@@ -53,8 +50,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         
-        
-        print("in view did load")
+        // TODO do not use fire base here!
         if Auth.auth().currentUser == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
@@ -73,7 +69,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         Post.listenToChange()
         
         
-      
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
         
@@ -115,6 +111,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             
             if (self.networkStat != 0)
             {
+               // PostOffline().deleteFromSql(database: SqlPostsModel.database!)
                 print("inside the net")
                 Post.getPosts{ (response) in
                     
@@ -132,7 +129,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                     self.postTableView.reloadData()
                 }
                 
-               
+                
             }
                 
                 
@@ -141,6 +138,10 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                 self.posts = PostOffline().listPosts(database: SqlPostsModel.database!)
                 //SqlPostsModel.listPosts()
                 self.currPosts = self.posts
+                DispatchQueue.main.async { // Correct
+                    self.postTableView.reloadData()
+                }
+                
                 
             }
             complition()
@@ -182,7 +183,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
         
         let post = self.currPosts[indexPath.row]
-        // print("posts \(post.image)")
+        //TODO insert users to sql
         let user = self.users[post.uid!] as AnyObject
         
         cell.titleLable.text = user["username"] as? String
@@ -265,15 +266,18 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             return
         }
         currPosts = posts.filter({post -> Bool in
-            return  post.content!.contains(searchText)
+            var a: Bool
+            a = (post.content!.contains(searchText) || post.tags!.contains(searchText)) 
+            return  a
         })
-        print(currPosts)
         postTableView.reloadData()
         
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
     }
+    
+    // When connected to internet delete sql posts.
     func networkStatusDidChange(status: Reachability.NetworkStatus) {
         switch status {
         case .notReachable:
@@ -288,19 +292,14 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         case .reachableViaWiFi:
             print("this is WIFI ")
             loadData(complition: {})
-            //SqlPostsModel.createTable()
-            //  SqlPostsModel.insertPost()
             
-            
-            
-            
-            
-        // debugPrint("ViewController: Network reachable through WiFi")
         case .reachableViaWWAN:
             //  SqlPostsModel.createTable()
             //  SqlPostsModel.insertPost()
             loadData(complition: {})
             debugPrint("ViewController: Network reachable through Cellular Data")
+            
+            
         }
         
     }
@@ -325,14 +324,8 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
     }
     
-    internal override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("TOUCH")
-        super.touchesBegan(touches, with: event)
-       
-    }
     @IBAction func tapped(_ sender: Any) {
-        print("123456789")
-         self.searchBar.endEditing(true)
+        self.searchBar.endEditing(true)
     }
     
     

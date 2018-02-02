@@ -25,7 +25,6 @@ class PostOffline {
                                                               self.image <- post.image!,
                                                               self.postId <- post.postId!)
         do {
-            
             try database.run(insertPost)
             print("inserted successfully")
         }catch{
@@ -97,6 +96,7 @@ class PostOffline {
     }
     
     func updatePostImage(image: UIImage, database: Connection, postId: String, completion: @escaping() -> Void ){
+        print("inside update")
         DispatchQueue.global(qos: .background).async {
             var img = String()
             let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
@@ -113,11 +113,32 @@ class PostOffline {
                 try database.run(
                     "UPDATE offlinePostsTable SET image = \"\(img)\" WHERE (postId = \"\(postId)\")")
                 completion()
+                print("updated")
             }catch{
-                print(error)
+                print("Error in update: \(error)")
             }
             
             
+        }
+        
+    }
+    
+    func deleteFromSql(database: Connection){
+        do{
+            try  database.run("delete from offlinePostsTable")
+        }catch{
+            print(error)
+        }
+       
+    }
+    func deletePost(database: Connection, postId: String){
+        do{
+            try database.run(
+                "DELETE FROM  offlinePostsTable WHERE  (postId = \"\(postId)\")")
+           
+            print("deleted!")
+        }catch{
+            print("Error in delete: \(error)")
         }
         
     }
