@@ -18,7 +18,6 @@
  * TODO: add users also to offline table.
  */
 import UIKit
-import FirebaseAuth
 import SQLite
 import ReachabilitySwift
 
@@ -37,43 +36,36 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     var posts = [Post]()
     var shits = [Post]()
     var currPosts = [Post]()
-    var users = [String:AnyObject]()
-    var userss = [User]()
+    var users = [User]()
     var usersListUp = User()
     var usersA = [String:AnyObject]()
     var networkStat = Int()
     
     
-    
-    
-    
-    
-    
+
     override func viewDidLoad() {
         
         // TODO do not use fire base here!
-        if Auth.auth().currentUser == nil {
+       
+        if  AuthUser.isUserConnected() == nil {
+            //Auth.auth().currentUser == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
             self.present(vc!, animated: false, completion:nil )
-            
-            
+  
         }
         
-        
-        
         super.viewDidLoad()
-        
         postTableView.isUserInteractionEnabled = true
-        
         
         Post.listenToChange()
         
         
         
-        
+        //adding the event of added post to the notification center.
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
         
+        //adding delegates.
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         
@@ -101,22 +93,17 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         posts.removeAll()
         DispatchQueue.global(qos: .background).async {
             SqlPostsModel.connectDB()
-            //SqlPostsModel.delAll()
             
             
-            
-            //   SqlPostsModel.delAll()
-            print("in load data")
             
             // Run only if internet connection is available.
-            
             if (self.networkStat != 0)
             {
                 User.getUsers(complition: {(response) in
                     guard let usersA = response  as? [User] else {return}
                     //  print("This is the users list and response\(usersList) \(response)")
-                    self.userss = usersA
-                    Post.getPosts(users: self.userss){ (response) in
+                    self.users = usersA
+                    Post.getPosts(users: self.users){ (response) in
                         
                         guard  let postsA = response as? [Post] else {return}
                         //  print("This is the users list and response\(usersList) \(response)")
@@ -124,20 +111,14 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                         self.currPosts = self.posts
                         self.postTableView.reloadData()
                     }
-                   
+                    
                 })
-                print("useres array length:\(self.userss.count)")
-              
+                print("useres array length:\(self.users.count)")
+                
                 print("inside the net")
                 
-                FirebaseModel.getUsers { (response) in
-                    
-                    guard  let usersA = response  as? [String : AnyObject] else {return}
-                    //  print("This is the users list and response\(usersList) \(response)")
-                    self.users = usersA
-                    self.postTableView.reloadData()
-                }
-               
+                
+                
                 
                 
             }
@@ -190,18 +171,20 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         
         
-        //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
         print("curr posts: \(self.currPosts)")
         let post = self.currPosts[indexPath.row]
-        //TODO insert users to sql
-        let user = self.users[post.uid!] as AnyObject
-        // get users should return a dictionary maby?
-        // TODO: continue with change - switch to users
-        
         
         if (self.networkStat != 0)
         {
-            cell.titleLable.text = user["username"] as? String
+            if let i = users.index(where: { $0.uid == post.uid! }) {
+                cell.titleLable.text = users[i].username!
+                print("this is the username:\(users[i].username!)")
+            }
+            else{
+                cell.titleLable.text = "Error"
+                print("this is the error:\(users)")
+            }
+         
         }else{
             cell.titleLable.text = self.currPosts[indexPath.row].username
         }
@@ -210,17 +193,6 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         cell.contentTextView.text = post.content
         let imageName = post.image
-        // let imageRef = Storage.storage().reference().child("Images/\(imageName!)")
-        
-        
-        //1024*1024 is one megabyte and we want 25 megabyte
-        //  print("This is the ref: \(imageRef)")
-        
-        
-        
-        /* cell.titleLable.alpha = 0
-         cell.contentTextView.alpha = 0
-         cell.postImageView.alpha = 0*/
         
         UIView.animate(withDuration: 0.4, animations: {
             cell.titleLable.alpha = 1
@@ -248,7 +220,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         // TODO: Check do try catch syntax
         do {
-            try Auth.auth().signOut()
+            try AuthUser.singout()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
             self.present(vc!, animated: true, completion: nil)
             
@@ -262,11 +234,13 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         print("in view did appear")
         
         //ADD THIS IS PROBLEMS APPEAR.
-       // self.loadData(complition: {})
+        // self.loadData(complition: {})
         
         
         
     }
+    
+    // Application became active - load data.
     @objc func applicationDidBecomeActive(notification: NSNotification) {
         print("LLLOOOOKKK!!")
         loadData(complition: {})
@@ -276,7 +250,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
     }
     
-    //TODO: add search by tags
+ 
     internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("inside search")
         guard !searchText.isEmpty else {
@@ -313,8 +287,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             loadData(complition: {})
             
         case .reachableViaWWAN:
-            //  SqlPostsModel.createTable()
-            //  SqlPostsModel.insertPost()
+
             loadData(complition: {})
             debugPrint("ViewController: Network reachable through Cellular Data")
             
@@ -322,22 +295,21 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         }
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        //Add the listiner of the network
         ReachabilityManager.shared.addListener(listener: self)
-        print("stats: \(ReachabilityManager.shared.isNetworkAvailable)")
-        print("stats: \(ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue)")
-        print("stats: \(ReachabilityManager.shared.reachabilityStatus)")
-        print("stats: \(Reachability.NetworkStatus.notReachable)")
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        
         super.viewDidDisappear(animated)
         ReachabilityManager.shared.removeListener(listener: self)
     }
+    
+    //if a post was added to the db. load data.
     func actOnChildAdded() {
         loadData(complition: {})
         

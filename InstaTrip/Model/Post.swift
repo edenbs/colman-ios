@@ -43,7 +43,6 @@ class Post: NSObject {
                     imageView.image = downloadedImage
                     PostOffline().updatePostImage(image: downloadedImage, database: SqlPostsModel.database!,
                                                   postId: self.postId!, completion: {})
-                    // SqlPostsModel.updatePostImage(image: downloadedImage, postId: self.postId!, completion: {})
                     
                 }
             }
@@ -61,23 +60,26 @@ class Post: NSObject {
         imageCache.setObject(decodedimage!, forKey: self.image as AnyObject)
         imageView.image = decodedimage
     }
+    
+    // Main get post func.
     func getPostImage(imageView: UIImageView){
-        
-        print("in post image")
+
+        // get posts online
         if (OfflineHelper.isOnline()){
             getPostImageOnline(imageView: imageView)
         }
+        // get posts offline
         else{
             getPostImageOffline(imageView: imageView)
         }
     }
+    
     static func notify() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: postAddedNotification), object: self)
     }
     
     public static func listenToChange(){
         var refHandle =  Database.database().reference().child("posts").observe(DataEventType.value, with: { (snapshot) in
-            //let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             print("inside the thing \(snapshot)")
             DispatchQueue.global(qos: .background).async {
                 notify()

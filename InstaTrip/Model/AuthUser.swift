@@ -7,12 +7,28 @@
 //
 
 import Foundation
+import FirebaseAuth
 class AuthUser{
     
     //TODO:
     
     // returns the current connected user.
-    func isUserConnected() -> User{
-        return User()
+    static func isUserConnected() ->  String?{
+        //(Auth.auth().currentUser)
+        if (Auth.auth().currentUser == nil){
+            return nil
+        }else{
+            return Auth.auth().currentUser?.uid
+        }
+        
+    }
+    static func singout(){
+        do {
+            try Auth.auth().signOut()
+            
+        } catch{
+            print("ERROR SIGNING OUT USER!")
+            
+        }
     }
 }

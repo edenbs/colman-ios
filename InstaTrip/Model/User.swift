@@ -18,9 +18,7 @@ class User: NSObject {
 
 //TODO
 
-func getUserByUID()->User{
-    return User()
-}
+
 
  static func getUsers(complition: @escaping (Any?) -> Void ){
     var users = [User]()
@@ -50,10 +48,7 @@ func getUserByUID()->User{
         complition(nil)
     }
 }
- 
-    func getOfflineUsername(){
-        
-    }
+
 
 }
 

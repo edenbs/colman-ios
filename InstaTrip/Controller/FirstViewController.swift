@@ -17,11 +17,7 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        FirebaseModel.getUsers { (response) in
-            
-        
-         
-        }
+       
     }
 
     override func didReceiveMemoryWarning() {
