@@ -20,6 +20,7 @@ class Post: NSObject {
     var tags: String?
     var uid: String?
     var postId: String?
+    var username: String?
     
     private func getPostImageOnline(imageView: UIImageView){
         imageView.image = nil
@@ -94,11 +95,6 @@ class Post: NSObject {
         let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
             (metadata,error) in
             if let metadata = metadata{
-                // A link to the photo
-                print(metadata.downloadURL())
-                
-                print("GOOOOOODD")
-                
                 // TODO: change to actual post object
                 let postObject: Dictionary<String, Any> = [
                     "uid" : self.uid,
@@ -174,11 +170,14 @@ class Post: NSObject {
         
     }
     
-    private static func getPostsWhenOnline(complition: @escaping (Any?) -> Void ){
+    private static func getPostsWhenOnline(users: [User],complition: @escaping (Any?) -> Void ){
         var posts = [Post]()
+          var username: String = ""
         print("in get Users")
         do {
+          
             Database.database().reference().child("posts").observeSingleEvent(of: .value, with:{(snapshot) in
+                
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     for post in dictionary{
                         var tempPost = Post()
@@ -189,8 +188,18 @@ class Post: NSObject {
                         tempPost.uid =  post.value["uid"] as? String
                         tempPost.postId = post.key
                         posts.append(tempPost)
-                        PostOffline().insert(post: tempPost, database: SqlPostsModel.database!)
-
+                        print("this is the uid: \(tempPost.uid)")
+                        if let i = users.index(where: { $0.uid == tempPost.uid! }) {
+                            username = users[i].username!
+                            print("this is the username:\(username)")
+                        }
+                        else{
+                            username = "Error"
+                            print("this is the error:\(users)")
+                        }
+                        PostOffline().insert(post: tempPost, database: SqlPostsModel.database!, username: username)
+                       
+                        
                     }
                     complition(posts)
                 }
@@ -204,9 +213,9 @@ class Post: NSObject {
     }
     
     
-    static func getPosts(complition: @escaping (Any?) -> Void ){
+    static func getPosts(users:[User] ,complition: @escaping (Any?) -> Void ){
         if (OfflineHelper.isOnline()){
-            getPostsWhenOnline(complition: complition)
+            getPostsWhenOnline(users: users, complition: complition)
         }
         else{
             complition(getPostsWhenOffline())

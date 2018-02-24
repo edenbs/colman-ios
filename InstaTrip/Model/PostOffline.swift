@@ -16,30 +16,37 @@ class PostOffline {
     let content = Expression<String>("content")
     let image = Expression<String>("image")
     let id = Expression<Int>("id")
+    let username = Expression<String>("username")
     static let offlinePostsTable = Table("offlinePostsTable")
     
-    func insert(post: Post, database: Connection){
+    func insert(post: Post, database: Connection, username: String){
+      // self.deleteFromSql(database: database)
         let insertPost = PostOffline.offlinePostsTable.insert(self.uid <- post.uid!,
                                                               self.content <- post.content!,
                                                               self.tags <- post.tags!,
                                                               self.image <- post.image!,
-                                                              self.postId <- post.postId!)
+                                                              self.postId <- post.postId!,
+                                                              self.username <- username)
+        
         do {
             try database.run(insertPost)
-            print("inserted successfully")
+            print("inserted successfully \(username)")
+            
         }catch{
             print("did not insert \(error)")
         }
         
-        print ("amount is \(count)" )
+        print ("amount is \(username)" )
     }
      func createTable(database: Connection){
+        
         let createTable = PostOffline.offlinePostsTable.create(ifNotExists: true)  { (table) in
             table.column(uid)
             table.column(image)
             table.column(tags)
             table.column(content)
             table.column(postId, unique: true)
+            table.column(username)
             table.column(id, primaryKey: true)
         }
         do {
@@ -83,6 +90,8 @@ class PostOffline {
                 tempPost.image = post[self.image]
                 tempPost.tags = post[self.tags]
                 tempPost.uid = post[self.content]
+                tempPost.username = post[self.username]
+                print("in get \(post[self.username])")
                 tempPostArr.append(tempPost)
                 
             }
@@ -125,7 +134,7 @@ class PostOffline {
     
     func deleteFromSql(database: Connection){
         do{
-            try  database.run("delete from offlinePostsTable")
+            try  database.run("Delete from offlinePostsTable")
         }catch{
             print(error)
         }

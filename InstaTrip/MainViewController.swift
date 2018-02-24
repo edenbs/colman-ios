@@ -38,6 +38,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     var shits = [Post]()
     var currPosts = [Post]()
     var users = [String:AnyObject]()
+    var userss = [User]()
     var usersListUp = User()
     var usersA = [String:AnyObject]()
     var networkStat = Int()
@@ -111,16 +112,24 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             
             if (self.networkStat != 0)
             {
-               // PostOffline().deleteFromSql(database: SqlPostsModel.database!)
-                print("inside the net")
-                Post.getPosts{ (response) in
-                    
-                    guard  let postsA = response as? [Post] else {return}
+                User.getUsers(complition: {(response) in
+                    guard let usersA = response  as? [User] else {return}
                     //  print("This is the users list and response\(usersList) \(response)")
-                    self.posts = postsA
-                    self.currPosts = self.posts
-                    
-                }
+                    self.userss = usersA
+                    Post.getPosts(users: self.userss){ (response) in
+                        
+                        guard  let postsA = response as? [Post] else {return}
+                        //  print("This is the users list and response\(usersList) \(response)")
+                        self.posts = postsA
+                        self.currPosts = self.posts
+                        self.postTableView.reloadData()
+                    }
+                   
+                })
+                print("useres array length:\(self.userss.count)")
+              
+                print("inside the net")
+                
                 FirebaseModel.getUsers { (response) in
                     
                     guard  let usersA = response  as? [String : AnyObject] else {return}
@@ -128,6 +137,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                     self.users = usersA
                     self.postTableView.reloadData()
                 }
+               
                 
                 
             }
@@ -181,13 +191,20 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         
         //TODO±!!!!!!@# create post object. - model. and change anyobject to post!!!!!!!---
-        
+        print("curr posts: \(self.currPosts)")
         let post = self.currPosts[indexPath.row]
         //TODO insert users to sql
         let user = self.users[post.uid!] as AnyObject
+        // get users should return a dictionary maby?
+        // TODO: continue with change - switch to users
         
-        cell.titleLable.text = user["username"] as? String
         
+        if (self.networkStat != 0)
+        {
+            cell.titleLable.text = user["username"] as? String
+        }else{
+            cell.titleLable.text = self.currPosts[indexPath.row].username
+        }
         
         
         
@@ -243,7 +260,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     internal override func viewDidAppear(_ animated: Bool) {
         print("in view did appear")
-        self.loadData(complition: {})
+        
+        //ADD THIS IS PROBLEMS APPEAR.
+       // self.loadData(complition: {})
         
         
         
