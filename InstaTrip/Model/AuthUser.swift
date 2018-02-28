@@ -22,7 +22,7 @@ class AuthUser{
         }
         
     }
-    static func singout(){
+    static func signout(){
         do {
             try Auth.auth().signOut()
             
@@ -31,4 +31,18 @@ class AuthUser{
             
         }
     }
+    
+    static func signin(username: String, password:String,complition: @escaping (Any?,Any?) -> Void )  {
+     
+        
+        
+        
+        
+        Auth.auth().signIn(withEmail: username, password: password) { (user, error) in
+          complition(user,error)
+        }
+        
+        
+    }
+    
 }

@@ -39,12 +39,20 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     var users = [User]()
     var usersListUp = User()
     var usersA = [String:AnyObject]()
-    var networkStat = Int()
-    
+    //var networkStat = Int()
+    var profileTabItem : UITabBarItem?
+    var postTabItem : UITabBarItem?
+   
     
 
     override func viewDidLoad() {
-        
+      let tabitems = self.tabBarController?.tabBar.items
+        if let tabarray = tabitems{
+            postTabItem = tabarray[1];
+           profileTabItem = tabarray[2];
+            
+            
+        }
         // TODO do not use fire base here!
        
         if  AuthUser.isUserConnected() == nil {
@@ -78,6 +86,15 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         self.postTableView.reloadData()
         self.searchBar.delegate = self
         setUpSearchBar()
+        
+        if(!OfflineHelper.isOnline()){
+            postTabItem?.isEnabled = false
+            profileTabItem?.isEnabled = false
+        }
+        else{
+            postTabItem?.isEnabled = true
+            profileTabItem?.isEnabled = true
+        }
     }
     
     
@@ -85,8 +102,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     
     func loadData(complition: @escaping () -> Void ){
+        print("in load data")
         // 0 NO net
-        self.networkStat = ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
+       // self.networkStat =      //ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
         
         
         currPosts.removeAll()
@@ -97,11 +115,14 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             
             
             // Run only if internet connection is available.
-            if (self.networkStat != 0)
+            if (OfflineHelper.isOnline() )
             {
+                print("in internet?!")
                 User.getUsers(complition: {(response) in
                     guard let usersA = response  as? [User] else {return}
                     //  print("This is the users list and response\(usersList) \(response)")
+                    
+                    print("in get usere")
                     self.users = usersA
                     Post.getPosts(users: self.users){ (response) in
                         
@@ -109,6 +130,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                         //  print("This is the users list and response\(usersList) \(response)")
                         self.posts = postsA
                         self.currPosts = self.posts
+                        print("1756: posts: \(self.currPosts.count)")
                         self.postTableView.reloadData()
                     }
                     
@@ -116,11 +138,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                 print("useres array length:\(self.users.count)")
                 
                 print("inside the net")
-                
-                
-                
-                
-                
+
             }
                 
                 
@@ -159,13 +177,16 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // insertPost()
+        print("1756")
+        print(self.currPosts.count)
+        print( section)
         return self.currPosts.count
     }
     
     
     // Indexpath is the counter of the current row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        self.networkStat = ReachabilityManager.shared.reachability.currentReachabilityStatus.hashValue
+       
         print("in table view")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
@@ -174,7 +195,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         print("curr posts: \(self.currPosts)")
         let post = self.currPosts[indexPath.row]
         
-        if (self.networkStat != 0)
+        if (OfflineHelper.isOnline() )
         {
             if let i = users.index(where: { $0.uid == post.uid! }) {
                 cell.titleLable.text = users[i].username!
@@ -220,7 +241,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         // TODO: Check do try catch syntax
         do {
-            try AuthUser.singout()
+            try AuthUser.signout()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
             self.present(vc!, animated: true, completion: nil)
             
@@ -242,7 +263,6 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     
     // Application became active - load data.
     @objc func applicationDidBecomeActive(notification: NSNotification) {
-        print("LLLOOOOKKK!!")
         loadData(complition: {})
     }
     
@@ -253,15 +273,16 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
  
     internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("inside search")
+        // gaurd - if unwrapping fails. meaning that searchText is nil like if let else
         guard !searchText.isEmpty else {
             currPosts = posts
             postTableView.reloadData()
             return
         }
         currPosts = posts.filter({post -> Bool in
-            var a: Bool
-            a = (post.content!.contains(searchText) || post.tags!.contains(searchText)) 
-            return  a
+            var isFound: Bool
+            isFound = (post.content!.lowercased().contains(searchText.lowercased()) || post.tags!.lowercased().contains(searchText.lowercased()))
+            return  isFound
         })
         postTableView.reloadData()
         
@@ -276,20 +297,26 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         case .notReachable:
             loadData(complition: {})
             debugPrint("ViewController: Network became unreachable")
-            
+           
             let alertController = UIAlertController(title: "iOScreator", message:
                 "Hey travler you should know that you are not connected to the internet, but thats ok. You can still explore."
                 , preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
+            postTabItem?.isEnabled = false
+            profileTabItem?.isEnabled = false
         case .reachableViaWiFi:
             print("this is WIFI ")
             loadData(complition: {})
+            postTabItem?.isEnabled = true
+            profileTabItem?.isEnabled = true
             
         case .reachableViaWWAN:
 
             loadData(complition: {})
             debugPrint("ViewController: Network reachable through Cellular Data")
+            postTabItem?.isEnabled = true
+            profileTabItem?.isEnabled = true
             
             
         }

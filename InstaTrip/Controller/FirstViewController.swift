@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseAuth
+
+
 
 class FirstViewController: UIViewController {
 
@@ -29,7 +29,7 @@ class FirstViewController: UIViewController {
         super.viewDidAppear(true)
         
         //Check if user is already signed in.
-        if Auth.auth().currentUser != nil {
+        if AuthUser.isUserConnected() != nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
             self.present(vc!, animated: false, completion:nil )
@@ -45,7 +45,8 @@ class FirstViewController: UIViewController {
     @IBAction func signInTapped(_ sender: Any) {
         let username = usernameTextField.text
         let password = passwordTextField.text
-        Auth.auth().signIn(withEmail: username!, password: password!) { (user, error) in
+        
+        AuthUser.signin(username: username!, password: password!, complition: { (user, error) in
             if (error != nil) {
                 // error logging in user
                 let alert = UIAlertController(title: "Error", message: "Incorrect password/username", preferredStyle: .alert)
@@ -55,10 +56,10 @@ class FirstViewController: UIViewController {
             else {
                 // success
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
-                 self.tabBarController?.selectedIndex = 0
+                self.tabBarController?.selectedIndex = 0
                 self.present(vc!, animated: true, completion: nil)
             }
-        }
+        })
     }
     
     @IBAction func backFromRegister(unwindSegue: UIStoryboardSegue) {

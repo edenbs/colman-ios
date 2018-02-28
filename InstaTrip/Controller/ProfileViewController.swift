@@ -8,7 +8,10 @@
 
 import UIKit
 import FirebaseAuth
-class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+import ReachabilitySwift
+class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,NetworkStatusListener {
+  
+    
     
     //TODO: add a alert that you are not connected to the internet. like posts page.
     //  @IBOutlet weak var deleteButton: UIButton!
@@ -114,6 +117,46 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         
         
     }
+
+    func networkStatusDidChange(status: Reachability.NetworkStatus) {
+        print("in net change!!")
+        switch status {
+        case .notReachable:
+            
+            debugPrint("ViewController: Network became unreachable")
+            
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "Hey travler you are not online! ."
+                , preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            
+            self.tabBarController?.selectedIndex = 0
+        case .reachableViaWiFi:
+            print("this is WIFI ")
+            
+            
+        case .reachableViaWWAN:
+            debugPrint("ViewController: Network reachable through Cellular Data")
+            
+            
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ReachabilityManager.shared.addListener(listener: self)
+        
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ReachabilityManager.shared.removeListener(listener: self)
+     
+        
+    }
+    
+
     
     
 }

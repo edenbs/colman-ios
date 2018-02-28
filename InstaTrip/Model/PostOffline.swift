@@ -20,7 +20,8 @@ class PostOffline {
     static let offlinePostsTable = Table("offlinePostsTable")
     
     func insert(post: Post, database: Connection, username: String){
-      // self.deleteFromSql(database: database)
+        
+        //self.deleteFromSql(database: database)
         let insertPost = PostOffline.offlinePostsTable.insert(self.uid <- post.uid!,
                                                               self.content <- post.content!,
                                                               self.tags <- post.tags!,
@@ -38,6 +39,7 @@ class PostOffline {
         
         print ("amount is \(username)" )
     }
+    
      func createTable(database: Connection){
         
         let createTable = PostOffline.offlinePostsTable.create(ifNotExists: true)  { (table) in
@@ -55,7 +57,7 @@ class PostOffline {
             
             
         }catch {
-            print("Error!!!: \(error)")
+            print("Error: \(error)")
         }
     }
     
@@ -134,7 +136,7 @@ class PostOffline {
     
     func deleteFromSql(database: Connection){
         do{
-            try  database.run("Delete from offlinePostsTable")
+            try  database.run("DROP TABLE offlinePostsTable")
         }catch{
             print(error)
         }

@@ -10,16 +10,11 @@
 // TODO : check if user did not pick an image - if he didnt pick do not let him post!!!! BAD!!
 // TODO: add a message that says that upload is done, if done user needs to say ok. only then go to the next page.
 import UIKit
-import Firebase
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
 import ProgressHUD
 import SystemConfiguration
-import SQLite
 import ReachabilitySwift
 
-class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate {
+class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate,NetworkStatusListener {
     
     
     @IBOutlet weak var contentTextField: UITextView!
@@ -32,8 +27,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var selectImageButton: UIButton!
-    var database: Connection!
-    
+   
     
     
     override func viewDidLoad() {
@@ -41,15 +35,6 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         
         
-       /* do {
-            let documentDirectory = try  FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true )
-            let fileUrl = documentDirectory.appendingPathComponent("posts").appendingPathExtension("sqlite3")
-            let database = try Connection(fileUrl.path)
-            self.database = database
-            // createTable()
-        } catch {
-            print (error)
-        }*/
         
         self.contentTextField.delegate = self
         // Do any additional setup after loading the view.
@@ -65,8 +50,7 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     // User wants to post
     @IBAction func postTapped(_ sender: Any) {
         let PhotoIdString = NSUUID().uuidString
-        let uploadRef = Storage.storage().reference().child("Images/\(PhotoIdString).jpg")
-        if let uid =  Auth.auth().currentUser?.uid {
+        if let uid =  AuthUser.isUserConnected()  {
             if let tags = tagsTextField.text {
                 if let content = contentTextField.text {
                     
@@ -78,16 +62,15 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
                     
                     post.insertNewPost(image: selectedImage!, complition: {
                         ProgressHUD.showSuccess("Uploaded successfully", interaction: true)
+               
                         self.tabBarController?.selectedIndex = 0
+                        
+                    
                     })
-                 
+                    
                 }
             }
         }
-        
-        
-        
-        
     }
     
     
@@ -97,29 +80,9 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
-
+        
     }
-    
-    
-    
-    //TODO:
-    // Change to UUID!!!!! LIKE THIS:
-    // let a = NSUUID().uuidString
-   /* func randomStringWithLength(length: Int) -> NSString{
-        // Casting to NSstring
-        let chars : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var randomString : NSMutableString = NSMutableString(capacity: length)
-        
-        for i in 0..<length {
-            var len = UInt32(chars.length)
-            
-            var rand = arc4random_uniform(len)
-            
-            randomString.appendFormat("%C", chars.character(at: Int(rand)))
-        }
-        
-        return randomString
-    }*/
+
     
     // The image picker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -128,10 +91,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             self.previewImageView.image = pickedImage
             
             // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-          // self.selectImageButton.isEnabled = false
+            // self.selectImageButton.isEnabled = false
             
             // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-           // self.selectImageButton.isHidden = true
+            // self.selectImageButton.isHidden = true
             
             self.tagsTextField.isEnabled = true
             
@@ -147,41 +110,72 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         picker.dismiss(animated: true, completion: nil)
         
     }
+    
     internal func textViewDidBeginEditing(_ textView: UITextView) {
-        print("THIS IS SHIT!!!!!!!!!")
         if( contentTextField.text == "Describe Your Scene...")
-      {  contentTextField.text = ""}
+        {  contentTextField.text = ""}
     }
     
-   
-    
-    
     internal override func viewDidAppear(_ animated: Bool) {
-        if (OfflineHelper.isOnline() == false) {
+        if (!OfflineHelper.isOnline()) {
             let alertController = UIAlertController(title: "iOScreator", message:
                 "YOU ARE NOT CONNECTED TO THE INTERNET!!!", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertController, animated: true, completion: nil)
+           
         }
         
     }
-    
-   
-   
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         ReachabilityManager.shared.addListener(listener: self)
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+         ReachabilityManager.shared.removeListener(listener: self)
         self.previewImageView.image = UIImage()
         self.tagsTextField.text = ""
         if(contentTextField.text != "Describe Your Scene...")
-       { self.contentTextField.text = ""}
+        { self.contentTextField.text = ""}
         
     }
+    
+    
+    
+    // When connected to internet delete sql posts.
+    func networkStatusDidChange(status: Reachability.NetworkStatus) {
+        print("in net change!!")
+        switch status {
+        case .notReachable:
+          
+            debugPrint("ViewController: Network became unreachable")
+            
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "Hey travler you are not online! you can not post."
+                , preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            
+                self.tabBarController?.selectedIndex = 0
+        case .reachableViaWiFi:
+            print("this is WIFI ")
+           
+            
+        case .reachableViaWWAN:
+            debugPrint("ViewController: Network reachable through Cellular Data")
+            
+            
+        }
+        
+    }
+  
+    
+    
+    
     
     
     /*

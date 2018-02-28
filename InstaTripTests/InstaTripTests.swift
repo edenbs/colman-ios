@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import FirebaseAuth
 @testable import InstaTrip
 
 
