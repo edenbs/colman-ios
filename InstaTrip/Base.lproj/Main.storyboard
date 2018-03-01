@@ -230,39 +230,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" indicatorStyle="black" text="Describe Your Scene..." textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ZF-z1-pft">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" indicatorStyle="black" text="Describe Your Scene..." textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ZF-z1-pft">
                                 <rect key="frame" x="19" y="401" width="381" height="211"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94770533376963351" green="0.94770533376963351" blue="0.94770533376963351" alpha="0.28328565140845069" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
                                 <rect key="frame" x="243" y="595" width="157" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="53"/>
                                 <state key="normal" title="Post!"/>
                                 <connections>
                                     <action selector="postTapped:" destination="fyn-uQ-qUj" eventType="touchUpInside" id="aey-e2-ffD"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
                                 <rect key="frame" x="1" y="86" width="413" height="274"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="0.096646420692737212" blue="0.079814028217605748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tags to help people find your post" textAlignment="center" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-WD-Eib">
-                                <rect key="frame" x="1" y="368" width="416" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tags to help people find your post" textAlignment="center" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-WD-Eib">
+                                <rect key="frame" x="1" y="360" width="410" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <rect key="contentStretch" x="0.050000000000000003" y="0.59999999999999998" width="1" height="1"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="32"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="location"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy6-eo-xvi">
-                                <rect key="frame" x="96" y="72" width="226" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy6-eo-xvi">
+                                <rect key="frame" x="96" y="72" width="226" height="53"/>
                                 <color key="backgroundColor" red="0.60702859283341826" green="0.51884357547428361" blue="0.64240608808290156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="35"/>
                                 <state key="normal" title="SELECT IMAGE">
@@ -275,6 +270,28 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8ZF-z1-pft" firstAttribute="leading" secondItem="xov-k7-Dyz" secondAttribute="leading" constant="19" id="8YY-7V-HPB"/>
+                            <constraint firstItem="IYZ-WD-Eib" firstAttribute="leading" secondItem="xov-k7-Dyz" secondAttribute="leading" constant="1" id="9Uh-fR-OCF"/>
+                            <constraint firstItem="8ZF-z1-pft" firstAttribute="top" secondItem="IYZ-WD-Eib" secondAttribute="bottom" constant="3" id="L4Y-Ak-14B"/>
+                            <constraint firstItem="0i4-Dj-lHG" firstAttribute="top" secondItem="l24-pJ-dw8" secondAttribute="bottom" id="OPj-Kv-qo9"/>
+                            <constraint firstAttribute="trailing" secondItem="8ZF-z1-pft" secondAttribute="trailing" constant="14" id="Oeo-4X-cpU"/>
+                            <constraint firstAttribute="trailing" secondItem="l24-pJ-dw8" secondAttribute="trailing" constant="14" id="Pou-ox-WNn"/>
+                            <constraint firstItem="0t0-fI-ITV" firstAttribute="top" secondItem="B3R-pT-svN" secondAttribute="bottom" constant="22" id="Tub-9u-eth"/>
+                            <constraint firstAttribute="trailing" secondItem="0t0-fI-ITV" secondAttribute="trailing" id="UhI-cT-Pq8"/>
+                            <constraint firstItem="IYZ-WD-Eib" firstAttribute="top" secondItem="0t0-fI-ITV" secondAttribute="bottom" id="VDB-Bl-t9W"/>
+                            <constraint firstItem="0t0-fI-ITV" firstAttribute="leading" secondItem="xov-k7-Dyz" secondAttribute="leading" constant="1" id="Wda-8g-E4b"/>
+                            <constraint firstItem="l24-pJ-dw8" firstAttribute="top" secondItem="IYZ-WD-Eib" secondAttribute="bottom" constant="197" id="Wlt-VU-O6n"/>
+                            <constraint firstItem="8ZF-z1-pft" firstAttribute="top" secondItem="IYZ-WD-Eib" secondAttribute="bottom" constant="3" id="ZUB-4V-no5"/>
+                            <constraint firstItem="fy6-eo-xvi" firstAttribute="top" secondItem="B3R-pT-svN" secondAttribute="bottom" constant="8" id="ZXe-ir-myE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fy6-eo-xvi" secondAttribute="trailing" constant="72" id="nw2-PQ-ZgM"/>
+                            <constraint firstItem="IYZ-WD-Eib" firstAttribute="top" secondItem="fy6-eo-xvi" secondAttribute="bottom" constant="235" id="p6a-dr-k9b"/>
+                            <constraint firstAttribute="trailing" secondItem="IYZ-WD-Eib" secondAttribute="trailing" constant="3" id="rlg-uh-gwt"/>
+                            <constraint firstItem="0i4-Dj-lHG" firstAttribute="top" secondItem="8ZF-z1-pft" secondAttribute="bottom" constant="75" id="s3F-Hz-LAB"/>
+                            <constraint firstItem="IYZ-WD-Eib" firstAttribute="top" secondItem="0t0-fI-ITV" secondAttribute="bottom" id="u3s-ND-Sta"/>
+                            <constraint firstItem="fy6-eo-xvi" firstAttribute="leading" secondItem="xov-k7-Dyz" secondAttribute="leadingMargin" constant="76" id="wAW-dA-2bK"/>
+                            <constraint firstItem="l24-pJ-dw8" firstAttribute="leading" secondItem="xov-k7-Dyz" secondAttribute="leading" constant="243" id="yr6-aJ-0xS"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="InstaTrip" id="aFU-fP-UPo">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="Iyd-ZL-yBn">
@@ -286,6 +303,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contentTextField" destination="8ZF-z1-pft" id="cOc-gW-TZy"/>
+                        <outlet property="postButton" destination="l24-pJ-dw8" id="767-vo-o0a"/>
                         <outlet property="previewImageView" destination="0t0-fI-ITV" id="z0d-RO-cfH"/>
                         <outlet property="selectImageButton" destination="fy6-eo-xvi" id="nbt-Kq-LVI"/>
                         <outlet property="tagsTextField" destination="IYZ-WD-Eib" id="IYq-HK-2CH"/>
@@ -327,24 +345,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ege-aD-zC5">
-                                                    <rect key="frame" x="0.0" y="63" width="414" height="308"/>
+                                                    <rect key="frame" x="0.0" y="63" width="414" height="319.66666666666669"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7T-Z3-GSx">
-                                                    <rect key="frame" x="15" y="11" width="384" height="63"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="RemachineScriptPersonalUseOnly" family="Remachine Script Personal Use " pointSize="62"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" text="Content" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-XE-lDv">
-                                                    <rect key="frame" x="15" y="378" width="384" height="67"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" editable="NO" text="Content" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-XE-lDv">
+                                                    <rect key="frame" x="15" y="395" width="384" height="40.666666666666686"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7T-Z3-GSx">
+                                                    <rect key="frame" x="15" y="9" width="384" height="62"/>
+                                                    <fontDescription key="fontDescription" name="RemachineScriptPersonalUseOnly" family="Remachine Script Personal Use " pointSize="62"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="g7T-Z3-GSx" firstAttribute="leading" secondItem="BtZ-PO-wlG" secondAttribute="leading" constant="15" id="3fe-9u-aYP"/>
+                                                <constraint firstAttribute="trailing" secondItem="g7T-Z3-GSx" secondAttribute="trailing" constant="15" id="DA5-kw-qMH"/>
+                                                <constraint firstItem="7ir-XE-lDv" firstAttribute="top" secondItem="g7T-Z3-GSx" secondAttribute="bottom" constant="324" id="XZ3-1z-4Bt"/>
+                                                <constraint firstItem="g7T-Z3-GSx" firstAttribute="top" secondItem="BtZ-PO-wlG" secondAttribute="top" constant="9" id="mxz-5h-0Nd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contentTextView" destination="7ir-XE-lDv" id="3Wc-CL-17S"/>
@@ -395,9 +417,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-aw-gkm">
-                                <rect key="frame" x="8" y="249" width="406" height="438"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-aw-gkm">
+                                <rect key="frame" x="8" y="209" width="406" height="478"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TRx-v8-UnV">
                                     <size key="itemSize" width="193" height="248"/>
@@ -406,7 +427,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <textView key="backgroundView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" id="glb-xb-X8r">
-                                    <rect key="frame" x="0.0" y="0.0" width="406" height="438"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="406" height="478"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <string key="text">Nothing to show yet
@@ -455,9 +476,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-4y-YCr">
-                                <rect key="frame" x="43" y="64" width="328" height="166"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-4y-YCr">
+                                <rect key="frame" x="43" y="64" width="328" height="126"/>
                                 <string key="text">Take a look at your
 awsome adventures</string>
                                 <fontDescription key="fontDescription" name="RemachineScriptPersonalUseOnly" family="Remachine Script Personal Use " pointSize="63"/>
@@ -466,6 +486,16 @@ awsome adventures</string>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vXO-aw-gkm" firstAttribute="top" secondItem="aiA-4y-YCr" secondAttribute="bottom" constant="59" id="SSS-KT-K7z"/>
+                            <constraint firstAttribute="trailing" secondItem="vXO-aw-gkm" secondAttribute="trailing" id="ShF-VK-Sf7"/>
+                            <constraint firstItem="vXO-aw-gkm" firstAttribute="leading" secondItem="Nf3-Yn-J3n" secondAttribute="leading" constant="8" id="W5e-OK-GVB"/>
+                            <constraint firstItem="aiA-4y-YCr" firstAttribute="leading" secondItem="Nf3-Yn-J3n" secondAttribute="leadingMargin" constant="23" id="i7k-8d-6ww"/>
+                            <constraint firstItem="OOT-73-rAa" firstAttribute="top" secondItem="vXO-aw-gkm" secondAttribute="bottom" id="ltI-ez-qd4"/>
+                            <constraint firstItem="aiA-4y-YCr" firstAttribute="top" secondItem="vuU-mm-iN5" secondAttribute="bottom" id="oge-Ih-vhv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aiA-4y-YCr" secondAttribute="trailing" constant="23" id="p2g-iz-PHq"/>
+                            <constraint firstItem="vXO-aw-gkm" firstAttribute="top" secondItem="aiA-4y-YCr" secondAttribute="bottom" constant="19" id="zWM-Mh-Ic5"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="g3r-mm-4OQ">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="9ee-kj-1hW">

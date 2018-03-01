@@ -11,7 +11,6 @@
 // TODO: add a message that says that upload is done, if done user needs to say ok. only then go to the next page.
 import UIKit
 import ProgressHUD
-import SystemConfiguration
 import ReachabilitySwift
 
 class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,UITextFieldDelegate,NetworkStatusListener {
@@ -28,13 +27,17 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var selectImageButton: UIButton!
    
+    @IBOutlet weak var postButton: UIButton!
     
     
     override func viewDidLoad() {
-        
+        self.postButton.isEnabled = false
         super.viewDidLoad()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         
+        
+        view.addGestureRecognizer(tap)
         
         self.contentTextField.delegate = self
         // Do any additional setup after loading the view.
@@ -89,15 +92,9 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         // Run after user picks pic
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.previewImageView.image = pickedImage
-            
-            // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-            // self.selectImageButton.isEnabled = false
-            
-            // Hides the Button after the user pickes an image. consider removing, what is the user wants to change?!
-            // self.selectImageButton.isHidden = true
-            
+           
             self.tagsTextField.isEnabled = true
-            
+            self.postButton.isEnabled = true
             self.selectedImage = pickedImage
             
             // uploadImage(image: pickedImage)
@@ -140,8 +137,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         self.previewImageView.image = UIImage()
         self.tagsTextField.text = ""
         if(contentTextField.text != "Describe Your Scene...")
-        { self.contentTextField.text = ""}
-        
+        { self.contentTextField.text = "Describe Your Scene..."}
+        self.postButton.isEnabled = false
     }
     
     
@@ -173,7 +170,10 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
         
     }
   
-    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
     
     

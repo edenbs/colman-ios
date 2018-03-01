@@ -18,7 +18,6 @@
  * TODO: add users also to offline table.
  */
 import UIKit
-import SQLite
 import ReachabilitySwift
 
 

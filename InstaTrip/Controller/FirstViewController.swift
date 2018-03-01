@@ -27,6 +27,12 @@ class FirstViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
         
         //Check if user is already signed in.
         if AuthUser.isUserConnected() != nil {
@@ -64,6 +70,10 @@ class FirstViewController: UIViewController {
     
     @IBAction func backFromRegister(unwindSegue: UIStoryboardSegue) {
         // Rewind from register screen
+    }
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 }
