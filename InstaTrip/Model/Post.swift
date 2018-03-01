@@ -63,12 +63,12 @@ class Post: NSObject {
     
     // Main get post func.
     func getPostImage(imageView: UIImageView){
-
+        
         // get posts online
         if (OfflineHelper.isOnline()){
             getPostImageOnline(imageView: imageView)
         }
-        // get posts offline
+            // get posts offline
         else{
             getPostImageOffline(imageView: imageView)
         }
@@ -86,47 +86,46 @@ class Post: NSObject {
             }
         })
     }
-    //TODO:
+    
     func insertNewPost( image: UIImage ,complition: @escaping () -> Void ){
-         let PhotoIdString = NSUUID().uuidString
-         let uploadRef = Storage.storage().reference().child("Images/\(PhotoIdString).jpg")
-         if let imageData = UIImageJPEGRepresentation(image, 0.1) {
+        let PhotoIdString = NSUUID().uuidString
+        let uploadRef = Storage.storage().reference().child("Images/\(PhotoIdString).jpg")
+        if let imageData = UIImageJPEGRepresentation(image, 0.1) {
             
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-        let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
-            (metadata,error) in
-            if let metadata = metadata{
-                // TODO: change to actual post object
-                let postObject: Dictionary<String, Any> = [
-                    "uid" : self.uid,
-                    "tags" : self.tags,
-                    "content" : self.content,
-                    "image" : PhotoIdString+".jpg",
-                    ]
-                Database.database().reference().child("posts").childByAutoId().setValue(postObject)
-                
+            let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
+                (metadata,error) in
+                if let metadata = metadata{
+                    // TODO: change to actual post object
+                    let postObject: Dictionary<String, Any> = [
+                        "uid" : self.uid,
+                        "tags" : self.tags,
+                        "content" : self.content,
+                        "image" : PhotoIdString+".jpg",
+                        ]
+                    Database.database().reference().child("posts").childByAutoId().setValue(postObject)
+                    
                     complition()
-                
-                
-              
-            }
-            else{
-                print ("BYE")
-                ProgressHUD.showError()
-            }
-        })
+                    
+                    
+                    
+                }
+                else{
+                    ProgressHUD.showError()
+                }
+            })
             uploadTask.observe(.progress, handler: { (snapshot) in
                 guard let progress = snapshot.progress else {
-                   return
+                    return
                 }
                 
                 let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
-                print(percentage)
+                //print(percentage)
                 ProgressHUD.show("Uploading", interaction: false)
                 
             })
-    }
+        }
     }
     
     
@@ -174,10 +173,10 @@ class Post: NSObject {
     
     private static func getPostsWhenOnline(users: [User],complition: @escaping (Any?) -> Void ){
         var posts = [Post]()
-          var username: String = ""
+        var username: String = ""
         print("in get Users")
         do {
-          
+            
             Database.database().reference().child("posts").observeSingleEvent(of: .value, with:{(snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -200,7 +199,7 @@ class Post: NSObject {
                             print("this is the error:\(users)")
                         }
                         PostOffline().insert(post: tempPost, database: SqlPostsModel.database!, username: username)
-                       
+                        
                         
                     }
                     complition(posts)
@@ -228,7 +227,7 @@ class Post: NSObject {
         Database.database().reference().child("posts").child(postId).removeValue(completionBlock: {(error, ref) in
             print("in 123456789")
             print(ref)
-          complition()
+            complition()
         })
         
         

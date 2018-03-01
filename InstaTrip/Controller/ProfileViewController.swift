@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import ReachabilitySwift
 class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,NetworkStatusListener {
   
@@ -26,7 +25,7 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         //TODO do not use fire base here move to user
-        if Auth.auth().currentUser == nil {
+        if AuthUser.isUserConnected() == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
             self.present(vc!, animated: false, completion:nil )
@@ -41,7 +40,7 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
     func loadData(){
         if(OfflineHelper.isOnline() == true)
         {
-            Post.getPostByUserID(uid: (Auth.auth().currentUser?.uid)! , complition: {(response) in
+            Post.getPostByUserID(uid: (AuthUser.isUserConnected())! , complition: {(response) in
                 let posts = response as? [Post]
                 self.userPosts = posts!
                 print("in view did load")

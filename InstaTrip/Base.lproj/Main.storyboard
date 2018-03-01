@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="a7x-mJ-8o3">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -30,11 +30,11 @@
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InstaTrip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CbC-uL-82V">
-                                <rect key="frame" x="26" y="50" width="368" height="122"/>
+                                <rect key="frame" x="22" y="50" width="337" height="122"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="104"/>
                                 <color key="textColor" red="0.22587255487726673" green="0.073855117682247506" blue="0.41432262764075878" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -44,20 +44,28 @@
                                     <nil key="shadowColor"/>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="klm-Zr-C7g">
-                                <rect key="frame" x="96" y="249" width="221" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="klm-Zr-C7g">
+                                <rect key="frame" x="92" y="249" width="190" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9o-98-Wz8">
-                                <rect key="frame" x="96" y="287" width="221" height="30"/>
+                                <rect key="frame" x="92" y="287" width="190" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ub9-5D-xJ1">
-                                <rect key="frame" x="156" y="521" width="108" height="46"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Login" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
+                                <rect key="frame" x="113" y="208" width="127" height="33"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="28"/>
+                                <color key="textColor" red="0.01415815856307745" green="0.0" blue="0.0" alpha="0.65110683336224351" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ub9-5D-xJ1">
+                                <rect key="frame" x="136" y="510" width="108" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="29"/>
                                 <state key="normal" title="Sign In"/>
                                 <userDefinedRuntimeAttributes>
@@ -67,15 +75,9 @@
                                     <action selector="signInTapped:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Flo-Tq-Z16"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Login" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="117" y="208" width="158" height="33"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="28"/>
-                                <color key="textColor" red="0.01415815856307745" green="0.0" blue="0.0" alpha="0.65110683336224351" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdJ-Ml-am4">
-                                <rect key="frame" x="70" y="602" width="274" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdJ-Ml-am4">
+                                <rect key="frame" x="50" y="591" width="274" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="25"/>
                                 <state key="normal" title="Don't have an account?"/>
                                 <userDefinedRuntimeAttributes>
@@ -90,22 +92,15 @@
                         <constraints>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="97" id="5VB-eI-Gra"/>
                             <constraint firstItem="CbC-uL-82V" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="6" id="62P-zb-HOJ"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="FdJ-Ml-am4" secondAttribute="bottom" constant="92" id="7n0-Sy-uLf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KQZ-1w-vlD" secondAttribute="trailing" constant="119" id="8TB-LP-vRi"/>
-                            <constraint firstItem="FdJ-Ml-am4" firstAttribute="top" secondItem="Ub9-5D-xJ1" secondAttribute="bottom" constant="35" id="PWT-t3-Frt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FdJ-Ml-am4" secondAttribute="trailing" constant="50" id="RX7-w4-6Mp"/>
                             <constraint firstItem="CbC-uL-82V" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="S6o-YV-E4A"/>
                             <constraint firstItem="h9o-98-Wz8" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="76" id="Tc2-wg-Cyf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="klm-Zr-C7g" secondAttribute="trailing" constant="77" id="ZYy-Ww-FkA"/>
                             <constraint firstItem="h9o-98-Wz8" firstAttribute="top" secondItem="klm-Zr-C7g" secondAttribute="bottom" constant="8" id="Zpf-hp-Lei"/>
-                            <constraint firstItem="FdJ-Ml-am4" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="50" id="b3O-2d-gra"/>
-                            <constraint firstItem="Ub9-5D-xJ1" firstAttribute="top" secondItem="h9o-98-Wz8" secondAttribute="bottom" constant="204" id="cEy-hw-Hsz"/>
                             <constraint firstItem="klm-Zr-C7g" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="76" id="eoz-8j-7Th"/>
                             <constraint firstItem="klm-Zr-C7g" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" id="nK1-w6-ViN"/>
                             <constraint firstItem="CbC-uL-82V" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="topMargin" constant="30" id="oWM-Ff-QGU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="h9o-98-Wz8" secondAttribute="trailing" constant="77" id="qdM-Wd-TRH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ub9-5D-xJ1" secondAttribute="trailing" constant="130" id="tE6-Bw-hdk"/>
-                            <constraint firstItem="Ub9-5D-xJ1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="136" id="wlN-3u-Mft"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="top" secondItem="CbC-uL-82V" secondAttribute="bottom" constant="36" id="ygD-Hg-1En"/>
                         </constraints>
                     </view>
@@ -128,29 +123,29 @@
                         <viewControllerLayoutGuide type="bottom" id="EMd-gG-MBH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Xbd-CG-sNS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rQg-5N-oGg">
-                                <rect key="frame" x="97" y="246" width="221" height="30"/>
+                                <rect key="frame" x="93" y="246" width="190" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-p9-LGU">
-                                <rect key="frame" x="97" y="297" width="221" height="30"/>
+                                <rect key="frame" x="93" y="297" width="190" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RR4-Sm-kO2">
-                                <rect key="frame" x="97" y="189" width="221" height="30"/>
+                                <rect key="frame" x="93" y="189" width="190" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pde-cn-nvU">
-                                <rect key="frame" x="45" y="451" width="324" height="51"/>
+                                <rect key="frame" x="41" y="451" width="293" height="51"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="33"/>
                                 <state key="normal" title="Create Account"/>
                                 <userDefinedRuntimeAttributes>
@@ -162,7 +157,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pT6-8S-hY7">
-                                <rect key="frame" x="23" y="28" width="368" height="122"/>
+                                <rect key="frame" x="19" y="28" width="337" height="122"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="104"/>
                                 <color key="textColor" red="0.22587255489999999" green="0.073855117679999999" blue="0.41432262759999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -227,17 +222,17 @@
                         <viewControllerLayoutGuide type="bottom" id="0i4-Dj-lHG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xov-k7-Dyz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" indicatorStyle="black" text="Describe Your Scene..." textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ZF-z1-pft">
-                                <rect key="frame" x="19" y="401" width="381" height="211"/>
+                                <rect key="frame" x="19" y="401" width="342" height="211"/>
                                 <color key="backgroundColor" red="0.94770533376963351" green="0.94770533376963351" blue="0.94770533376963351" alpha="0.28328565140845069" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l24-pJ-dw8">
-                                <rect key="frame" x="243" y="595" width="157" height="92"/>
+                                <rect key="frame" x="243" y="595" width="118" height="92"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="53"/>
                                 <state key="normal" title="Post!"/>
                                 <connections>
@@ -245,11 +240,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0t0-fI-ITV">
-                                <rect key="frame" x="1" y="86" width="413" height="274"/>
+                                <rect key="frame" x="1" y="86" width="374" height="274"/>
                                 <color key="tintColor" red="1" green="0.096646420692737212" blue="0.079814028217605748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tags to help people find your post" textAlignment="center" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IYZ-WD-Eib">
-                                <rect key="frame" x="1" y="360" width="410" height="38"/>
+                                <rect key="frame" x="1" y="360" width="371" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <rect key="contentStretch" x="0.050000000000000003" y="0.59999999999999998" width="1" height="1"/>
                                 <nil key="textColor"/>
@@ -257,7 +252,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="location"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy6-eo-xvi">
-                                <rect key="frame" x="96" y="72" width="226" height="53"/>
+                                <rect key="frame" x="92" y="72" width="195" height="53"/>
                                 <color key="backgroundColor" red="0.60702859283341826" green="0.51884357547428361" blue="0.64240608808290156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="35"/>
                                 <state key="normal" title="SELECT IMAGE">
@@ -323,7 +318,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Zdn-Xe-SFK"/>
                     </layoutGuides>
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="pdj-3l-KWn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="446" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RgN-x4-OFb">
@@ -341,7 +336,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="446"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oyh-a6-OPv" id="BtZ-PO-wlG">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="445.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="445.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ege-aD-zC5">
@@ -349,7 +344,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" editable="NO" text="Content" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ir-XE-lDv">
-                                                    <rect key="frame" x="15" y="395" width="384" height="40.666666666666686"/>
+                                                    <rect key="frame" x="15" y="395" width="384" height="41"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="PoiretOne-Regular" family="Poiret One" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -414,11 +409,11 @@
                         <viewControllerLayoutGuide type="bottom" id="OOT-73-rAa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Nf3-Yn-J3n">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-aw-gkm">
-                                <rect key="frame" x="8" y="209" width="406" height="478"/>
+                                <rect key="frame" x="8" y="209" width="367" height="409"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TRx-v8-UnV">
                                     <size key="itemSize" width="193" height="248"/>
@@ -427,7 +422,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <textView key="backgroundView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" id="glb-xb-X8r">
-                                    <rect key="frame" x="0.0" y="0.0" width="406" height="478"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="367" height="409"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <string key="text">Nothing to show yet
@@ -437,7 +432,7 @@
                                 </textView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewCell" id="eif-uo-fTE" customClass="CollectionViewCell" customModule="InstaTrip" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="193" height="248"/>
+                                        <rect key="frame" x="87" y="0.0" width="193" height="248"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="193" height="248"/>
@@ -477,7 +472,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-4y-YCr">
-                                <rect key="frame" x="43" y="64" width="328" height="126"/>
+                                <rect key="frame" x="39" y="64" width="297" height="126"/>
                                 <string key="text">Take a look at your
 awsome adventures</string>
                                 <fontDescription key="fontDescription" name="RemachineScriptPersonalUseOnly" family="Remachine Script Personal Use " pointSize="63"/>
@@ -522,7 +517,7 @@ awsome adventures</string>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="frU-EC-lqB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GTf-cB-mDO">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -543,7 +538,7 @@ awsome adventures</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Md4-B9-6TV">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -590,7 +585,7 @@ awsome adventures</string>
                     <tabBarItem key="tabBarItem" title="Profile" image="icons8-login_as_user_filled.png" id="5f8-4a-VPB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="plA-HE-HJr">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
