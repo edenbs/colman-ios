@@ -249,7 +249,7 @@
                                 <rect key="contentStretch" x="0.050000000000000003" y="0.59999999999999998" width="1" height="1"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Parisish" family="Parisish" pointSize="32"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="location"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="yes" keyboardType="alphabet" returnKeyType="go" smartDashesType="yes" smartInsertDeleteType="yes" smartQuotesType="yes" textContentType="location"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy6-eo-xvi">
                                 <rect key="frame" x="92" y="72" width="195" height="53"/>
