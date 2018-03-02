@@ -10,7 +10,9 @@ import UIKit
 import FirebaseStorage
 import FirebaseDatabase
 import ProgressHUD
+
 let imageCache = NSCache<AnyObject, AnyObject>()
+
 //Added to listen to child changes of posts..
 let postAddedNotification = "com.instatrip.postAddedNotification"
 
@@ -24,11 +26,13 @@ class Post: NSObject {
     
     private func getPostImageOnline(imageView: UIImageView){
         imageView.image = nil
+        
         //check if iamge is in cache
         if let cachedImage = imageCache.object(forKey: self.image as AnyObject) as? UIImage{
             imageView.image  = cachedImage
             return
         }
+        
         let imageRef = Storage.storage().reference().child("Images/\(self.image!)")
         imageRef.getData(maxSize: 25 * 1024 * 1024, completion: {(data, err) -> Void in
             if err == nil {
@@ -37,7 +41,6 @@ class Post: NSObject {
                     imageView.image = downloadedImage
                     PostOffline().updatePostImage(image: downloadedImage, database: SqlPostsModel.database!,
                                                   postId: self.postId!, completion: {})
-                    
                 }
             }
         })
@@ -46,10 +49,13 @@ class Post: NSObject {
     private func getPostImageOffline(imageView: UIImageView){
         if let cachedImage = imageCache.object(forKey: self.image as AnyObject) as? UIImage{
             imageView.image  = cachedImage
+            
             return
         }
+        
         let dataDecoded : Data = Data(base64Encoded: self.image!, options: .ignoreUnknownCharacters)!
         let decodedimage = UIImage(data: dataDecoded)
+        
         imageCache.setObject(decodedimage!, forKey: self.image as AnyObject)
         imageView.image = decodedimage
     }
@@ -61,7 +67,8 @@ class Post: NSObject {
         if (OfflineHelper.isOnline()){
             getPostImageOnline(imageView: imageView)
         }
-            // get posts offline
+            
+        // get posts offline
         else{
             getPostImageOffline(imageView: imageView)
         }
@@ -89,7 +96,6 @@ class Post: NSObject {
             let uploadTask = uploadRef.putData(imageData, metadata:metadata, completion: {
                 (metadata,error) in
                 if let metadata = metadata{
-                    // TODO: change to actual post object
                     let postObject: Dictionary<String, Any> = [
                         "uid" : self.uid,
                         "tags" : self.tags,
@@ -99,9 +105,6 @@ class Post: NSObject {
                     Database.database().reference().child("posts").childByAutoId().setValue(postObject)
                     
                     complition()
-                    
-                    
-                    
                 }
                 else{
                     ProgressHUD.showError()
@@ -113,15 +116,11 @@ class Post: NSObject {
                 }
                 
                 let percentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
-                //print(percentage)
                 ProgressHUD.show("Uploading", interaction: false)
-                
             })
         }
     }
-    
-    
-    
+
     static func getPostByUserID(uid: String, complition: @escaping (Any?) -> Void ){
         var posts = [Post]()
         do {
@@ -134,27 +133,20 @@ class Post: NSObject {
                         tempPost.tags =  post.value["tags"] as? String
                         tempPost.uid =  post.value["uid"] as? String
                         tempPost.postId = post.key
-                        //                        tempPost.postId = post.key
-                        posts.append(tempPost)
                         
+                        posts.append(tempPost)
                     }
                     
                     complition(posts)
-                    
-                    
                 }
-                
-                
             })
         } catch {
             complition(nil)
         }
-        
-        
     }
+    
     private static func getPostsWhenOffline()-> [Post]{
         return PostOffline().listPosts(database: SqlPostsModel.database!)
-        
     }
     
     private static func getPostsWhenOnline(users: [User],complition: @escaping (Any?) -> Void ){
@@ -172,27 +164,26 @@ class Post: NSObject {
                         tempPost.tags =  post.value["tags"] as? String
                         tempPost.uid =  post.value["uid"] as? String
                         tempPost.postId = post.key
+                        
                         posts.append(tempPost)
+                        
                         if let i = users.index(where: { $0.uid == tempPost.uid! }) {
                             username = users[i].username!
                         }
                         else{
                             username = "Error"
                         }
+                        
                         PostOffline().insert(post: tempPost, database: SqlPostsModel.database!, username: username)
-                        
-                        
                     }
+                    
                     complition(posts)
                 }
-                
-                
             })
         } catch {
             complition(nil)
         }
     }
-    
     
     static func getPosts(users:[User] ,complition: @escaping (Any?) -> Void ){
         if (OfflineHelper.isOnline()){
@@ -207,9 +198,7 @@ class Post: NSObject {
         Database.database().reference().child("posts").child(postId).removeValue(completionBlock: {(error, ref) in
             complition()
         })
-        
-        
-        
+
         Storage.storage().reference().child("Images/\(imageName)").delete { error in
             if let error = error {
                 // Uh-oh, an error occurred!
@@ -220,9 +209,5 @@ class Post: NSObject {
         
         PostOffline().deletePost(database: SqlPostsModel.database!, postId: postId)
     }
-    
-    
-    
-    
 }
 

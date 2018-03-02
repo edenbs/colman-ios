@@ -16,6 +16,7 @@ class PostTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
         self.titleLable.alpha = 0
         self.postImageView.alpha = 0
@@ -24,8 +25,5 @@ class PostTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
- 
-
 }

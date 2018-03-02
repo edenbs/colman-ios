@@ -14,20 +14,13 @@ class User: NSObject {
     var email: String?
     var uid: String?
 
-
-
-//TODO
-
-
-
  static func getUsers(complition: @escaping (Any?) -> Void ){
     var users = [User]()
     do {
         Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
             
             if let usersDictionary = snapshot.value as? [String: AnyObject]{
-             //   var usersList = [String]()
-                
+
                 for user in usersDictionary{
                     var tempUser  = User()
                     tempUser.email = user.value["email"] as? String

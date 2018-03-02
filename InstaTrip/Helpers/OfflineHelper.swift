@@ -9,13 +9,8 @@
 import Foundation
 import ReachabilitySwift
 class OfflineHelper {
-   
-    
-    
     static func isOnline()-> Bool{
         var stat = ReachabilityManager.shared.reachability.currentReachabilityStatus
         return stat != Reachability.NetworkStatus.notReachable
-        
     }
-    
 }

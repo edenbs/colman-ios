@@ -29,45 +29,31 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
-    
-    // @IBOutlet weak var postsTableView: UITableView!
     var posts = [Post]()
     var shits = [Post]()
     var currPosts = [Post]()
     var users = [User]()
     var usersListUp = User()
     var usersA = [String:AnyObject]()
-    //var networkStat = Int()
     var profileTabItem : UITabBarItem?
     var postTabItem : UITabBarItem?
-    
-    
     
     override func viewDidLoad() {
         let tabitems = self.tabBarController?.tabBar.items
         if let tabarray = tabitems{
             postTabItem = tabarray[1];
             profileTabItem = tabarray[2];
-            
-            
         }
-        // TODO do not use fire base here!
         
         if  AuthUser.isUserConnected() == nil {
-            //Auth.auth().currentUser == nil {
             // user is loggedin
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
-            self.present(vc!, animated: false, completion:nil )
-            
+            self.present(vc!, animated: false, completion:nil)
         }
         
         super.viewDidLoad()
         postTableView.isUserInteractionEnabled = true
-        
         Post.listenToChange()
-        
-        
         
         //adding the event of added post to the notification center.
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.actOnChildAdded), name: NSNotification.Name(rawValue: postAddedNotification), object: nil)
@@ -75,13 +61,8 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         //adding delegates.
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
-        
         posts.removeAll()
         currPosts.removeAll()
-        
-        
-        
-        
         self.postTableView.reloadData()
         self.searchBar.delegate = self
         setUpSearchBar()
@@ -96,18 +77,11 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         }
     }
     
-    
-    
-    
-    
     func loadData(complition: @escaping () -> Void ){
-        
         currPosts.removeAll()
         posts.removeAll()
         DispatchQueue.global(qos: .background).async {
             SqlPostsModel.connectDB()
-            
-            
             
             // Run only if internet connection is available.
             if (OfflineHelper.isOnline() )
@@ -125,11 +99,8 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                         
                         self.postTableView.reloadData()
                     }
-                    
                 })
             }
-                
-                
             else {
                
                 self.posts = PostOffline().listPosts(database: SqlPostsModel.database!)
@@ -137,15 +108,10 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
                 DispatchQueue.main.async { // Correct
                     self.postTableView.reloadData()
                 }
-                
-                
             }
+            
             complition()
         }
-        
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,11 +119,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        
         return 1
     }
     
@@ -165,14 +127,12 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         return self.currPosts.count
     }
     
-    
     // Indexpath is the counter of the current row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
-
         let post = self.currPosts[indexPath.row]
         
-        if (OfflineHelper.isOnline() )
+        if (OfflineHelper.isOnline())
         {
             if let i = users.index(where: { $0.uid == post.uid! }) {
                 cell.titleLable.text = users[i].username!
@@ -180,12 +140,9 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             else{
                 cell.titleLable.text = "Error"
             }
-            
         }else{
             cell.titleLable.text = self.currPosts[indexPath.row].username
         }
-        
-        
         
         cell.contentTextView.text = post.content
         let imageName = post.image
@@ -194,10 +151,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             cell.titleLable.alpha = 1
             cell.contentTextView.alpha = 1
             cell.postImageView.alpha = 1
-            
-            
         })
-        
         
         post.getPostImage(imageView: cell.postImageView)
         
@@ -211,10 +165,7 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         // Rewind from Post screen
     }
     
-    
     @IBAction func logoutTapped(_ sender: Any) {
-        
-        // TODO: Check do try catch syntax
         do {
             try AuthUser.signout()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
@@ -222,12 +173,11 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             
         } catch{
             print("ERROR SIGNING OUT USER!")
-            
         }
     }
     
     internal override func viewDidAppear(_ animated: Bool) {
-     
+         loadData(complition: {})
     }
     
     // Application became active - load data.
@@ -236,7 +186,6 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
     }
     
     private func setUpSearchBar(){
-        
     }
     
     
@@ -252,11 +201,11 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             isFound = (post.content!.lowercased().contains(searchText.lowercased()) || post.tags!.lowercased().contains(searchText.lowercased()))
             return  isFound
         })
+        
         postTableView.reloadData()
-        
     }
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
     }
     
     // When connected to internet delete sql posts.
@@ -273,21 +222,18 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
             self.present(alertController, animated: true, completion: nil)
             postTabItem?.isEnabled = false
             profileTabItem?.isEnabled = false
+        
         case .reachableViaWiFi:
             loadData(complition: {})
             postTabItem?.isEnabled = true
             profileTabItem?.isEnabled = true
             
         case .reachableViaWWAN:
-            
             loadData(complition: {})
             debugPrint("ViewController: Network reachable through Cellular Data")
             postTabItem?.isEnabled = true
             profileTabItem?.isEnabled = true
-            
-            
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -295,6 +241,13 @@ class MainViewController: UIViewController,  UITableViewDelegate, UITableViewDat
         super.viewWillAppear(animated)
         //Add the listiner of the network
         ReachabilityManager.shared.addListener(listener: self)
+        if(OfflineHelper.isOnline()){
+            postTabItem?.isEnabled = true
+            profileTabItem?.isEnabled = true
+        }else{
+            postTabItem?.isEnabled = false
+            profileTabItem?.isEnabled = false
+        }
         
     }
     

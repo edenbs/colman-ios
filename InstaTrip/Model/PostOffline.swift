@@ -20,7 +20,7 @@ class PostOffline {
     static let offlinePostsTable = Table("offlinePostsTable")
     
     func insert(post: Post, database: Connection, username: String){
-        
+        print("userName:\(username)")
         //self.deleteFromSql(database: database)
         let insertPost = PostOffline.offlinePostsTable.insert(self.uid <- post.uid!,
                                                               self.content <- post.content!,
@@ -38,7 +38,7 @@ class PostOffline {
         
     }
     
-     func createTable(database: Connection){
+    func createTable(database: Connection){
         
         let createTable = PostOffline.offlinePostsTable.create(ifNotExists: true)  { (table) in
             table.column(uid)
@@ -52,33 +52,18 @@ class PostOffline {
         do {
             try database.run(createTable)
             
-            
         }catch {
             print("Error: \(error)")
         }
     }
     
     func listPosts(database: Connection) -> [Post]{
-        
         var tempPost = Post()
         var tempPostArr = [Post]()
-        var a = 0
-        do {
-            for post in  try database.prepare(PostOffline.offlinePostsTable) {
-                a = a+1
-            }
-        }catch{
-            print("this is the error in list:\(error)")
-        }
-        
-        
-        
         
         do {
-            
-           
             let postsList = try database.prepare(PostOffline.offlinePostsTable)
-
+            
             for post in postsList {
                 tempPost = Post()
                 tempPost.content = post[self.content]
@@ -86,15 +71,14 @@ class PostOffline {
                 tempPost.tags = post[self.tags]
                 tempPost.uid = post[self.content]
                 tempPost.username = post[self.username]
-                tempPostArr.append(tempPost)
                 
+                tempPostArr.append(tempPost)
             }
-         
+            
             return tempPostArr
         } catch {
             return [Post]()
         }
-
     }
     
     func updatePostImage(image: UIImage, database: Connection, postId: String, completion: @escaping() -> Void ){
@@ -102,13 +86,8 @@ class PostOffline {
             var img = String()
             let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
             img = imageData.base64EncodedString(options: .lineLength64Characters)
-            
-            
             let post = PostOffline.offlinePostsTable.filter(self.postId == postId)
-            
-            
             let updatePost = post.update(self.image <- img)
-            
             
             do{
                 try database.run(
@@ -117,10 +96,7 @@ class PostOffline {
             }catch{
                 print("Error in update: \(error)")
             }
-            
-            
         }
-        
     }
     
     func deleteFromSql(database: Connection){
@@ -129,13 +105,14 @@ class PostOffline {
         }catch{
             print(error)
         }
-       
+        
     }
+    
     func deletePost(database: Connection, postId: String){
         do{
             try database.run(
                 "DELETE FROM  offlinePostsTable WHERE  (postId = \"\(postId)\")")
-           
+            
         }catch{
             print("Error in delete: \(error)")
         }
