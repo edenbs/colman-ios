@@ -45,14 +45,11 @@ class RegisterViewController: UIViewController {
             else {
                 if let uid = AuthUser.isUserConnected(){
                     AuthUser.setUserName(username: username!, uid: uid)
-                   // let userRef = Database.database().reference().child("users").child(uid)
-                   // let object = ["username": username]
-                   // userRef.setValue(object)
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarVC")
                     self.present(vc!, animated: true, completion: nil)
                 }
                 else{
-                    print("THIS IS NOT WORKING!!!!!")
+                    print("Error")
                 }
                 
                 

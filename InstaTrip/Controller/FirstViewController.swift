@@ -15,8 +15,6 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
-        print("in view morning")
-        print(OfflineHelper.isOnline())
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -31,12 +29,8 @@ class FirstViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
         view.addGestureRecognizer(tap)
-        
         //Check if user is already signed in.
         if AuthUser.isUserConnected() != nil {
             // user is loggedin

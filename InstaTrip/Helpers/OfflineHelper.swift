@@ -14,9 +14,6 @@ class OfflineHelper {
     
     static func isOnline()-> Bool{
         var stat = ReachabilityManager.shared.reachability.currentReachabilityStatus
-        print("NIGHT!")
-        print(ReachabilityManager.shared.reachability.currentReachabilityStatus)
-        print("isOnline \(stat != Reachability.NetworkStatus.notReachable)")
         return stat != Reachability.NetworkStatus.notReachable
         
     }

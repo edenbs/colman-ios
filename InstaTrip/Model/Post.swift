@@ -30,15 +30,9 @@ class Post: NSObject {
             return
         }
         let imageRef = Storage.storage().reference().child("Images/\(self.image!)")
-        print("this is the name:\(self.image!)")
-        print("this is the ref:\(imageRef)")
-        
         imageRef.getData(maxSize: 25 * 1024 * 1024, completion: {(data, err) -> Void in
             if err == nil {
-                //GOOD
                 if let downloadedImage = UIImage(data: data!){
-                    
-                    
                     imageCache.setObject(downloadedImage, forKey: self.image as AnyObject)
                     imageView.image = downloadedImage
                     PostOffline().updatePostImage(image: downloadedImage, database: SqlPostsModel.database!,
@@ -54,7 +48,6 @@ class Post: NSObject {
             imageView.image  = cachedImage
             return
         }
-        print("this is self\(self)")
         let dataDecoded : Data = Data(base64Encoded: self.image!, options: .ignoreUnknownCharacters)!
         let decodedimage = UIImage(data: dataDecoded)
         imageCache.setObject(decodedimage!, forKey: self.image as AnyObject)
@@ -80,7 +73,6 @@ class Post: NSObject {
     
     public static func listenToChange(){
         var refHandle =  Database.database().reference().child("posts").observe(DataEventType.value, with: { (snapshot) in
-            print("inside the thing \(snapshot)")
             DispatchQueue.global(qos: .background).async {
                 notify()
             }
@@ -131,17 +123,12 @@ class Post: NSObject {
     
     
     static func getPostByUserID(uid: String, complition: @escaping (Any?) -> Void ){
-        print("get user by id")
         var posts = [Post]()
         do {
             Database.database().reference().child("posts").queryOrdered(byChild: "uid").queryEqual(toValue: uid).observeSingleEvent(of: .value, with:{(snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject]{
-                    
-                    print(dictionary)
                     for post in dictionary{
                         var tempPost = Post()
-                        
-                        print("this is total shit \(post.value["content"])")
                         tempPost.content = post.value["content"] as? String
                         tempPost.image =  post.value["image"] as? String
                         tempPost.tags =  post.value["tags"] as? String
@@ -160,7 +147,6 @@ class Post: NSObject {
                 
             })
         } catch {
-            print("error")
             complition(nil)
         }
         
@@ -174,7 +160,6 @@ class Post: NSObject {
     private static func getPostsWhenOnline(users: [User],complition: @escaping (Any?) -> Void ){
         var posts = [Post]()
         var username: String = ""
-        print("in get Users")
         do {
             
             Database.database().reference().child("posts").observeSingleEvent(of: .value, with:{(snapshot) in
@@ -182,21 +167,17 @@ class Post: NSObject {
                 if let dictionary = snapshot.value as? [String: AnyObject]{
                     for post in dictionary{
                         var tempPost = Post()
-                        print("this is total shit \(post.value["content"])")
                         tempPost.content = post.value["content"] as? String
                         tempPost.image =  post.value["image"] as? String
                         tempPost.tags =  post.value["tags"] as? String
                         tempPost.uid =  post.value["uid"] as? String
                         tempPost.postId = post.key
                         posts.append(tempPost)
-                        print("this is the uid: \(tempPost.uid)")
                         if let i = users.index(where: { $0.uid == tempPost.uid! }) {
                             username = users[i].username!
-                            print("this is the username:\(username)")
                         }
                         else{
                             username = "Error"
-                            print("this is the error:\(users)")
                         }
                         PostOffline().insert(post: tempPost, database: SqlPostsModel.database!, username: username)
                         
@@ -208,7 +189,6 @@ class Post: NSObject {
                 
             })
         } catch {
-            print("error")
             complition(nil)
         }
     }
@@ -225,8 +205,6 @@ class Post: NSObject {
     
     static func deletePost(postId: String,imageName: String,complition: @escaping () -> Void ){
         Database.database().reference().child("posts").child(postId).removeValue(completionBlock: {(error, ref) in
-            print("in 123456789")
-            print(ref)
             complition()
         })
         
@@ -234,7 +212,6 @@ class Post: NSObject {
         
         Storage.storage().reference().child("Images/\(imageName)").delete { error in
             if let error = error {
-                print("storage \(error)")
                 // Uh-oh, an error occurred!
             } else {
                 // File deleted successfully

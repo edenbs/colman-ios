@@ -9,7 +9,7 @@
 import UIKit
 import ReachabilitySwift
 class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,NetworkStatusListener {
-  
+    
     
     
     //TODO: add a alert that you are not connected to the internet. like posts page.
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
             self.present(vc!, animated: false, completion:nil )
             
         }
-
+        
         
         
         
@@ -43,9 +43,7 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
             Post.getPostByUserID(uid: (AuthUser.isUserConnected())! , complition: {(response) in
                 let posts = response as? [Post]
                 self.userPosts = posts!
-                print("in view did load")
                 if (self.userPosts.count == 0) {
-                    print("inside the if")
                     self.nothingLable.isHidden = false
                 }
                 else {
@@ -58,8 +56,6 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
             )}
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count")
-        print(userPosts.count)
         return userPosts.count
     }
     
@@ -87,11 +83,10 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         return cell
     }
     internal override func viewDidAppear(_ animated: Bool) {
-        print("in view did appear")
         self.loadData()
         
     }
-
+    
     
     
     @IBAction func tap(_ sender: Any) {
@@ -107,7 +102,6 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-            print("Handle Cancel Logic here")
         }))
         
         present(refreshAlert, animated: true, completion: nil)
@@ -116,9 +110,8 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
         
         
     }
-
+    
     func networkStatusDidChange(status: Reachability.NetworkStatus) {
-        print("in net change!!")
         switch status {
         case .notReachable:
             
@@ -132,9 +125,7 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
             
             self.tabBarController?.selectedIndex = 0
         case .reachableViaWiFi:
-            print("this is WIFI ")
-            
-            
+            debugPrint("this is WIFI ")
         case .reachableViaWWAN:
             debugPrint("ViewController: Network reachable through Cellular Data")
             
@@ -151,11 +142,11 @@ class ProfileViewController: UIViewController,UICollectionViewDelegate,UICollect
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         ReachabilityManager.shared.removeListener(listener: self)
-     
+        
         
     }
     
-
+    
     
     
 }

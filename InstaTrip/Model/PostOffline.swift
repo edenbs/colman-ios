@@ -31,13 +31,11 @@ class PostOffline {
         
         do {
             try database.run(insertPost)
-            print("inserted successfully \(username)")
             
         }catch{
             print("did not insert \(error)")
         }
         
-        print ("amount is \(username)" )
     }
     
      func createTable(database: Connection){
@@ -53,7 +51,6 @@ class PostOffline {
         }
         do {
             try database.run(createTable)
-            print("Successfull!")
             
             
         }catch {
@@ -62,7 +59,6 @@ class PostOffline {
     }
     
     func listPosts(database: Connection) -> [Post]{
-        print("in listposts")
         
         var tempPost = Post()
         var tempPostArr = [Post]()
@@ -70,8 +66,6 @@ class PostOffline {
         do {
             for post in  try database.prepare(PostOffline.offlinePostsTable) {
                 a = a+1
-                // print("id: \(post)")
-                // id: 1, name: Optional("Alice"), email: alice@mac.com
             }
         }catch{
             print("this is the error in list:\(error)")
@@ -87,27 +81,23 @@ class PostOffline {
 
             for post in postsList {
                 tempPost = Post()
-                print("in FOR listposts")
                 tempPost.content = post[self.content]
                 tempPost.image = post[self.image]
                 tempPost.tags = post[self.tags]
                 tempPost.uid = post[self.content]
                 tempPost.username = post[self.username]
-                print("in get \(post[self.username])")
                 tempPostArr.append(tempPost)
                 
             }
          
             return tempPostArr
         } catch {
-            print("ERRRRORRR")
             return [Post]()
         }
 
     }
     
     func updatePostImage(image: UIImage, database: Connection, postId: String, completion: @escaping() -> Void ){
-        print("inside update")
         DispatchQueue.global(qos: .background).async {
             var img = String()
             let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
@@ -124,7 +114,6 @@ class PostOffline {
                 try database.run(
                     "UPDATE offlinePostsTable SET image = \"\(img)\" WHERE (postId = \"\(postId)\")")
                 completion()
-                print("updated")
             }catch{
                 print("Error in update: \(error)")
             }
@@ -147,7 +136,6 @@ class PostOffline {
             try database.run(
                 "DELETE FROM  offlinePostsTable WHERE  (postId = \"\(postId)\")")
            
-            print("deleted!")
         }catch{
             print("Error in delete: \(error)")
         }

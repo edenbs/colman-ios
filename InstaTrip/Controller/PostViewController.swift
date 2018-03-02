@@ -124,8 +124,6 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             self.isContent = false
         }
         validateForm()
-         print("ENDDDD \(contentTextField.text)")
-        
     }
     
     internal override func viewDidAppear(_ animated: Bool) {
@@ -160,23 +158,17 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     // When connected to internet delete sql posts.
     func networkStatusDidChange(status: Reachability.NetworkStatus) {
-        print("in net change!!")
         switch status {
         case .notReachable:
-          
             debugPrint("ViewController: Network became unreachable")
-            
             let alertController = UIAlertController(title: "iOScreator", message:
                 "Hey travler you are not online! you can not post."
                 , preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             self.present(alertController, animated: true, completion: nil)
-            
-                self.tabBarController?.selectedIndex = 0
+            self.tabBarController?.selectedIndex = 0
         case .reachableViaWiFi:
-            print("this is WIFI ")
-           
-            
+            debugPrint("this is WIFI ")
         case .reachableViaWWAN:
             debugPrint("ViewController: Network reachable through Cellular Data")
             

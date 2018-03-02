@@ -22,16 +22,13 @@ class User: NSObject {
 
  static func getUsers(complition: @escaping (Any?) -> Void ){
     var users = [User]()
-    print("in get Users")
     do {
         Database.database().reference().child("users").observeSingleEvent(of: .value, with: {(snapshot) in
-            print("in users?")
             
             if let usersDictionary = snapshot.value as? [String: AnyObject]{
              //   var usersList = [String]()
                 
                 for user in usersDictionary{
-                    print("in for users")
                     var tempUser  = User()
                     tempUser.email = user.value["email"] as? String
                     tempUser.username = user.value["username"] as? String
@@ -44,7 +41,6 @@ class User: NSObject {
             }
         })
     } catch {
-        print("error")
         complition(nil)
     }
 }
