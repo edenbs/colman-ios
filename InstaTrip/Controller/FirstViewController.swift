@@ -15,8 +15,11 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
+        print("in view morning")
+        print(OfflineHelper.isOnline())
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
        
     }
 
@@ -45,7 +48,15 @@ class FirstViewController: UIViewController {
         
         // Show keyboard by default
         
-        
+        if (!OfflineHelper.isOnline()) {
+            let alertController = UIAlertController(title: "iOScreator", message:
+                "YOU ARE NOT CONNECTED TO THE INTERNET!!!", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+
     }
 
     @IBAction func signInTapped(_ sender: Any) {
@@ -75,6 +86,9 @@ class FirstViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+  
+    
+
     
 }
 

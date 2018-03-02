@@ -21,7 +21,8 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     
     
     var imageFileName = ""
-    
+    var isImgSelected: Bool? = false
+    var isContent: Bool? = false
     var selectedImage: UIImage?
     
     @IBOutlet weak var previewImageView: UIImageView!
@@ -94,11 +95,13 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
             self.previewImageView.image = pickedImage
            
             self.tagsTextField.isEnabled = true
-            self.postButton.isEnabled = true
+           // self.postButton.isEnabled = true
+            self.isImgSelected = true
             self.selectedImage = pickedImage
             
             // uploadImage(image: pickedImage)
             picker.dismiss(animated: true, completion: nil)
+            validateForm()
         }
     }
     
@@ -111,6 +114,18 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     internal func textViewDidBeginEditing(_ textView: UITextView) {
         if( contentTextField.text == "Describe Your Scene...")
         {  contentTextField.text = ""}
+        
+        
+    }
+    internal func textViewDidEndEditing(_ textView: UITextView) {
+        if(contentTextField.text.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
+            self.isContent = true
+        }else{
+            self.isContent = false
+        }
+        validateForm()
+         print("ENDDDD \(contentTextField.text)")
+        
     }
     
     internal override func viewDidAppear(_ animated: Bool) {
@@ -176,7 +191,13 @@ class PostViewController: UIViewController,UIImagePickerControllerDelegate, UINa
     }
     
     
-    
+    internal func validateForm(){
+        if(isContent! && isImgSelected!){
+            self.postButton.isEnabled = true
+        }else{
+            self.postButton.isEnabled = false
+        }
+    }
     
     /*
      // MARK: - Navigation
